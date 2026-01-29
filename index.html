@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Legislation</title>
+  <title>NSW Legislation - CreedieFiveM</title>
 
   <style>
     :root {
@@ -13,12 +13,12 @@
       --muted: #555555;
       --border: #cfd4d9;
       --accent: #002b5c;
+      --accent-light: rgba(0, 43, 92, 0.1);
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      margin: 0;
       font-family: "Segoe UI", Arial, Helvetica, sans-serif;
       background: var(--bg);
       color: var(--text);
@@ -27,98 +27,146 @@
     }
 
     header {
-      background: var(--panel);
-      border-bottom: 5px solid var(--accent);
-      padding: 30px 24px;
+      background: linear-gradient(135deg, #002b5c 0%, #001f45 100%);
+      color: white;
+      text-align: center;
+      padding: 50px 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     }
 
     header h1 {
-      margin: 0;
-      font-size: 2rem;
-      font-weight: 600;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
 
-    header p {
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 0.95rem;
+    header .subtitle {
+      font-size: 1.3rem;
+      opacity: 0.95;
+      margin-bottom: 8px;
+    }
+
+    header .info {
+      font-size: 1rem;
+      opacity: 0.85;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
     }
 
     .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 28px 24px 64px;
+      max-width: 1300px;
+      margin: 40px auto;
+      padding: 0 24px;
       display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 32px;
+      grid-template-columns: 340px 1fr;
+      gap: 36px;
     }
 
     nav {
       background: var(--panel);
       border: 1px solid var(--border);
-      padding: 18px;
+      border-radius: 12px;
+      padding: 20px;
       position: sticky;
       top: 20px;
       max-height: calc(100vh - 40px);
       overflow-y: auto;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
 
     nav h2 {
-      margin: 0 0 14px;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 0.6px;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    #search-container {
+      margin-bottom: 20px;
+    }
+
+    #search-input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    #search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(0, 43, 92, 0.15);
     }
 
     nav a {
       display: block;
-      padding: 6px 4px;
+      padding: 10px 14px;
       color: var(--accent);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+      margin: 4px 0;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      background: var(--accent-light);
+      transform: translateX(4px);
     }
 
     main {
       display: flex;
       flex-direction: column;
-      gap: 26px;
+      gap: 28px;
     }
 
     section {
       background: var(--panel);
       border: 1px solid var(--border);
-      padding: 26px 28px;
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
     }
 
     section h3 {
-      margin-top: 0;
-      margin-bottom: 16px;
-      font-size: 1.15rem;
+      margin: 0 0 20px;
+      font-size: 1.4rem;
       font-weight: 600;
       color: var(--accent);
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent-light);
     }
 
     section pre {
       margin: 0;
       white-space: pre-wrap;
       font-family: inherit;
-      font-size: 0.95rem;
-      line-height: 1.6;
+      font-size: 0.98rem;
+      line-height: 1.7;
+      color: #2d2d2d;
     }
 
     footer {
       background: var(--panel);
-      border-top: 1px solid var(--border);
-      padding: 26px 24px;
-      font-size: 0.85rem;
-      color: var(--muted);
+      border-top: 3px solid var(--accent);
+      padding: 40px 24px;
       text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 80px;
+    }
+
+    footer strong {
+      color: var(--accent);
+      font-size: 1.1rem;
     }
 
     @media (max-width: 900px) {
@@ -129,31 +177,40 @@
         position: static;
         max-height: none;
       }
+      header h1 { font-size: 2.4rem; }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Legislation</h1>
-    <p>Official consolidated legislative document</p>
+    <h1>NSW LEGISLATION</h1>
+    <div class="subtitle">CreedieFiveM Official Consolidated Rules</div>
+    <div class="info">
+      Fully enforced in-game legislation • Realistic NSW-style penalties • Last updated January 2026<br>
+      <strong>Made with precision by Creedie • Sydney, Australia</strong>
+    </div>
   </header>
 
   <div class="container">
     <nav id="sidebar">
       <h2>Table of Contents</h2>
+      <div id="search-container">
+        <input type="text" id="search-input" placeholder="🔍 Search all 112 sections..." autocomplete="off" />
+      </div>
+      <div id="toc-links"></div>
     </nav>
 
     <main id="content"></main>
   </div>
 
   <footer>
-    © Legislative Authority · Published for reference purposes
+    © 2026 CreedieFiveM • NSW Legislation Handbook • <strong>Made by Creedie</strong><br>
+    For use in CreedieFiveM Roleplay Server • Sydney, Australia
   </footer>
 
   <script>
     const legislationSections = [
-      // Previous sections (1–11) unchanged – abbreviated here for brevity
       { title: "Section 1 – Speeding", text: "Exceeding the designated speed limits is prohibited.\n\nDesignated speed limits:\n1. 60 km/h in city and highly populated areas (Paleto Bay, Sandy Shores)\n2. 80 km/h on open roads\n3. 110 km/h on highways\n\nPenalties apply subject to the following tiers:\n\n1. A person who is driving more than 100 km/h over the speed limit is subject to a fine, 30 demerit points, and the vehicle being impounded for up to 6 hours.\n2. A person driving 50–99 km/h over the speed limit is subject to a fine and 20 demerit points.\n3. A person who is driving 30–49 km/h over the speed limit is subject to a fine and 10 demerit points.\n4. A person driving 10–29 km/h over the speed limit is subject to a fine and 5 demerit points.\n5. A person who is driving less than 10 km/h over the speed limit is subject to a fine." },
       { title: "Section 2 – Not Complying with Traffic Devices", text: "A driver must comply with all traffic control devices, including traffic lights and signs.\n\nSpecific requirements:\n1. A driver must stop for at least 5 seconds at a red traffic light.\n2. A driver may turn right after waiting for at least 3 seconds, provided it is safe to do so.\n\n3. A driver who fails to follow traffic control devices is liable to a fine and 3 demerit points." },
       { title: "Section 3 – Illegal U-Turn", text: "A person who unlawfully performs a U-turn, including over a double line or in any other prohibited location or manner, is guilty of an offence and is liable to a fine and 1 demerit point." },
@@ -165,713 +222,146 @@
       { title: "Section 9 – Wearing Helmets for Motorised and Non-Motorised Vehicles", text: "1. A person travelling on a motorcycle, ATV, or push bike on a road, road-related area, or public footpath must wear an approved helmet that is securely fitted and fastened on the rider’s head.\n\n2. The rider of a motorcycle must not carry a passenger unless the passenger is wearing an approved motorcycle helmet that is securely fitted and fastened on the passenger's head.\n\n3. Any person who fails to wear a required helmet is liable to a fine and 2 demerit points." },
       { title: "Section 10 – Allocation of Demerit Points", text: "1. Every person driving a vehicle with a licence starts with a maximum of 30 points available on their licence.\n\n2. Demerit points are allocated upon conviction for a demerit-point-eligible offence.\n\n3. If a person accumulates 30 demerit points, their licence is deemed disqualified. Reinstatement periods are as follows:\n   - First disqualification: contact police after 24 hours to reinstate.\n   - Second disqualification: contact police after 48 hours to reinstate.\n   - Third disqualification: contact police after 72 hours to reinstate.\n   - Fourth disqualification: contact police after 7 days to reinstate.\n\n4. After the fourth disqualification, the person must apply to the courts for reinstatement of their driver’s licence." },
       { title: "Section 11 – Dangerous Driving Causing Injury/Damage", text: "1. A person who operates a vehicle in a dangerous manner in any place commits an offence.\n\n2. If a person operates a vehicle dangerously and thereby causes death or grievous bodily harm to another person, they commit a serious offence and are liable to:\n   - 7 demerit points\n   - Maximum penalty: 10 months imprisonment" },
-
-      // === New sections added here ===
-      { 
-        title: "Section 12 – Driving Under the Influence / PCA Offences", 
-        text: "1. A person who is driving a motor vehicle under the influence of:\n   1) Alcohol, or\n   2) Prohibited Drugs\n   commits an offence.\n\n2. A person who operates a vehicle must return a Blood Alcohol Concentration (BAC) of 0.05 or less to be legally driving.\n\n3. Low-Range PCA: A driver with a blood alcohol level between 0.05 and 0.079.\n\n4. Mid-Range PCA: A driver with a blood alcohol level between 0.08 and 0.149.\n\n5. High-Range PCA: A driver with a BAC above 0.15. Maximum penalty – 10 months imprisonment; driving licence suspended for up to 48 hours by police.\n\n6. Any person who has traces of drugs in their system while driving commits an offence. Maximum penalty – 10 months imprisonment; driving licence suspended up to 48 hours by police." 
-      },
-      { 
-        title: "Section 13 – Reckless Driving", 
-        text: "1. A person driving in a manner that is unsafe and reckless with no regard for other road users commits an offence. This may include but is not limited to:\n   1) Driving that could harm others\n   2) Doing burnouts\n   3) Cutting corners while turning\n\n2. A person found guilty under subsection (1) is liable to a fine and 12 demerit points." 
-      },
-      { 
-        title: "Section 14 – Evasion of Police", 
-        text: "1. A person who attempts to flee from police or is fleeing from police commits a crime.\n\n2. Fleeing from police may include but is not limited to:\n   1) Running away on foot\n   2) Driving a motor vehicle\n\n3. If a person evades police using a motor vehicle they are liable to a fine and imprisonment along with 15 demerit points. First offence: verbal warning to the vehicle owner. Second offence: vehicle can be impounded for up to 3 hours.\n\n4. A NSWPF Sergeant+ may approve up to 48 hours impoundment.\n\n5. A NSWPF Inspector+ may approve up to 72 hours impoundment.\n\nMaximum Penalty – 10 months imprisonment." 
-      },
-      { 
-        title: "Section 15 – Reckless Evasion of Police", 
-        text: "1. A person who attempts to flee from police and in the process puts others' lives at risk is guilty of a crime.\n\n2. Reckless evasion may involve but is not limited to:\n   1) Excessive speeding\n   2) Driving on the wrong side of the road\n   3) Driving on sidewalks\n   4) Cutting corners at intersections\n   5) Ramming of vehicles\n\n3. If a person evades police using a motor vehicle they are liable to a fine and imprisonment along with 20 demerit points. First offence: verbal warning to the vehicle owner. Second offence: vehicle can be impounded for up to 3 hours.\n\n4. A NSWPF Sergeant+ may approve up to 48 hours impoundment.\n\n5. A NSWPF Inspector+ may approve up to 72 hours impoundment.\n\nMaximum Penalty – 10 months imprisonment." 
-      },
-      { 
-        title: "Section 16 – Racing and Speed Trials", 
-        text: "1. Any person who organises, promotes, or takes part in:\n   1) Any races between vehicles on the road; or\n   2) Any attempt to establish or break any vehicle records on the road; or\n   3) Any trial of speed on the road; or\n   4) Any competitive trial on the road to test their skills or for a benefit or advantage of anything in value;\n\n2. Is guilty of an offence, unless prior written permission has been obtained from a NSWPF Inspector+ or approval from the Traffic and Highway Patrol supervisor or the courts.\n\nMaximum Penalty – 10 months imprisonment." 
-      },
-      { 
-        title: "Section 17 – Failure to Follow a Lawful Order", 
-        text: "1. Any person who fails to follow a lawful order from an officer commits a breach and is guilty of a crime.\n\nMaximum Penalty – 5 months imprisonment." 
-      },
-      { 
-        title: "Section 18 – Failure to Provide Identification / Providing False Information", 
-        text: "1. Any person who fails to provide a valid ID upon request from a Law Enforcement Officer is guilty of a crime.\n   - A person is only required to provide identification if police reasonably suspect they have committed an offence or are driving a motor vehicle.\n\n2. Acceptable forms of identification include but are not limited to:\n   1) Driver's Licence\n   2) Gun Licence\n   3) Photo ID Card\n\n3. A person who provides a false name and/or identification to police when requested is guilty of a crime.\n\n4. A police officer may arrest a person in order to make enquiries to establish their identity.\n\n5. Any person who gives information to any government employee/official (including in a document) that the person knows is false or misleading in a material particular is guilty of a crime.\n\nMaximum Penalty – 5 months imprisonment." 
-      },
-      { 
-        title: "Section 19 – Hinder Police in Execution of Duties", 
-        text: "1. A person commits an offence under this section when they (including but not limited to):\n   1) Refuse to leave the crime scene\n   2) Block officer's movements\n   3) Interfere in an active situation, including pursuits\n\n2. Any person found guilty under subsection (1) commits a crime.\n\nMaximum Penalty – 5 months imprisonment." 
-      },
-      { 
-        title: "Section 20 – Resisting Arrest", 
-        text: "1. A person who resists, or incites another person to resist, a police officer in the execution of the officer’s duty commits an offence.\n\nMaximum Penalty – 5 months imprisonment." 
-      },
-      { 
-        title: "Section 21 – Public Intoxication / Disorderly Conduct", 
-        text: "1. A person who is under the influence of alcohol or drugs in public and acting in a manner that isn’t suitable is in violation. This includes but is not limited to:\n   1) Being naked in public\n   2) Being drunk in public\n   3) Being high in public." 
-      },
-      { 
-        title: "Section 22 – Trespass", 
-        text: "1. A person must not enter into, or remain in, someone’s house, yard, or business premises without their permission unless they have a lawful reason to be there." 
-      },
-      { 
-        title: "Section 23 – Public Nuisance", 
-        text: "1. A person commits a public nuisance offence if:\n\n2. The person behaves in:\n   1) A disorderly way, or\n   2) An offensive way, or\n   3) A threatening way, or\n   4) A violent way, and\n\n3. The person’s behaviour begins or is likely to interfere with the enjoyment or passage of any members of the public." 
-      },
-      // === New sections start here ===
-      { 
-        title: "Section 24 – Illegal Hunting", 
-        text: "1. A person is found guilty of unlawfully hunting when:\n" +
-              "   1) Hunting without a firearms license\n" +
-              "   2) Using an illegal firearm\n" +
-              "   3) Hunting outside of hunting reserves\n" +
-              "   4) Inhumanely killing animals\n" +
-              "   5) In an unsafe manner\n" +
-              "   6) Poaching protected species\n\n" +
-              "2. Subject to subsection 1, hunting reserves within New South Wales are hills/forestry located at Paleto Bay Forest. Hunting within a Main Rd, or local suburbs/cities is called unlawful hunting and if caught are liable to fines.\n\n" +
-              "3. Subject to subsection 1, protected species are as listed:\n" +
-              "   1) Boar\n" +
-              "   2) Hen\n" +
-              "   3) Cat\n" +
-              "   4) Dog\n" +
-              "   5) Monkey"
-      },
-      { 
-        title: "Section 25 – Firearms Licenses", 
-        text: "1. A person may have their firearms license revoked when committing an offence that involves the use of a firearm in an offensive manner:\n" +
-              "   1) A first offence of disqualification will require the person to contact the police after 4 days to reinstate the license\n" +
-              "   2) A second offence of disqualification will require the person to contact the police after 7 days to reinstate the license\n" +
-              "   3) The third offence of disqualification will require the person to contact the police after 14 days to reinstate the license\n\n" +
-              "2. After the third offence, any person must then be seen before a judge for possible reinstatement of their license."
-      },
-      { 
-        title: "Section 26 – Brandishing a Weapon in Public", 
-        text: "1. A person who publicly displays a sharp/blunt weapon in the public eye, or in any other place so as to endanger the life of any other person is guilty of a crime.\n\n" +
-              "2. A person who publicly displays a firearm out in the public eye, or in any other place so as to endanger the life of any other person is guilty of a crime.\n\n" +
-              "Maximum Penalty – 5 months imprisonment."
-      },
-      {
-  title: "Section 27 – Possession of Illegal Weapons",
-  text: "1. Any weapons not purchasable from a gun store (Ammu-Nation) are deemed illegal.\n\n" +
-        "2. Any person found in possession of an illegal melee weapon(s) (any melee weapon that can’t be obtained legally from an Ammu-Nation) is guilty of an offence.\n\n" +
-        "3. Any person found in possession of an illegal firearm(s) (any pistol that can be obtained legally from an Ammu-Nation) is guilty of an offence.\n\n" +
-        "Maximum Penalty – 10 months imprisonment.\n\n" +
-        "4. Any person found in possession of an illegal high calibre (2-handers/long arms) (e.g. Shotguns, Assault Rifles, SMG and other automatic weapons) is guilty of an offence.\n\n" +
-        "Maximum Penalty – 20 months imprisonment."
-},
-{
-  title: "Section 28 – Discharging a Firearm with Intent",
-  text: "1. Intent to cause bodily harm A person who–\n" +
-        "   1. Discharges any firearm or other loaded arms, or\n" +
-        "   2. Attempts to discharge any firearm or other loaded arms, with intent to cause grievous bodily harm to any person is guilty of an offence\n\n" +
-        "2. Intent to resist arrest etc A person who–\n" +
-        "   1. Discharges any firearm or other loaded arms, or\n" +
-        "   2. Attempts to discharge any firearm or other loaded arms, with intent to resist or prevent his or her (or another person’s) lawful arrest or detention, is guilty of an offence\n\n" +
-        "Maximum penalty - 20 Months imprisonment"
-},
-{
-  title: "Section 29 – Effects of Firearm Prohibition Order",
-  text: "1. Prohibition on persons acquiring, possessing or using firearms, firearm parts or ammunition\n\n" +
-        "2. A person who is subject to a firearm prohibition order must not acquire, possess or use a firearm\n\n" +
-        "3. A person may only be searched on their persons at any time if an FRP is imposed on them\n\n" +
-        "4. If firearms, firearm parts or ammunition are found on the person they are then found guilty of a crime and in breach of their FRP\n\n" +
-        "Maximum penalty - 30 months imprisonment"
-},
-{
-  title: "Section 30 – Possession of unauthorised equipment",
-  text: "1. The judicial officers may deem any equipment illegal if the item or equipment is not to be possessed by an ordinary person.\n\n" +
-        "2. Some of the equipment that are deemed illegal are gun holsters, bulletproof vests, handcuffs, and military/tactical attire\n\n" +
-        "3. Police may search a person if seen wearing and confiscate any items deemed illegal and may remove any and all weapons/firearms on the person.\n\n" +
-        "4. Any person showing is in possession of unauthorised equipment is liable to imprisonment\n\n" +
-        "Maximum penalty - 5 months imprisonment"
-},
-{
-  title: "Section 31 – Manufacturing of illegal weapons",
-  text: "1. Any person who is unlawfully producing/manufacturing or involved in the process of producing/manufacturing illegal firearms (2-handers/long arms) (E.g shotguns, assault rifles, SMG’s & other automatic weapons, also any Pistols and melee weapons that can’t be found in an Ammu-Nation) is guilty of an offence\n\n" +
-        "Maximum Penalty - 50 Months imprisonment"
-},
-{
-  title: "Section 32 – Supply of weapons",
-  text: "1. Any person who carries out the business of supplying and/or distributing weapons who isn’t a licenced weapon dealer (Ammu-Nation) is guilty of an offence\n\n" +
-        "Maximum Penalty - 25 Months Imprisonment"
-},
-{
-  title: "Section 33 – Possession of prohibited drugs",
-  text: "1. A person who is found with prohibited drugs (Cannabis, Cocaine, MDMA/Ecstasy, Hallucinogens, heroin, Ketamine & Methamphetamine) on them or in their possession is guilty\n\n" +
-        "2. A person found in possession of 5 grams or less is subject to a fine\n" +
-        "3. A person found in possession of more than 5 grams is subject to a fine and imprisonment\n" +
-        "4. A person found in possession of 20 grams or more is subject to a fine and a maximum penalty - of 10 months imprisonment\n" +
-        "5. A person found in possession of 50 grams or more is subject to a fine and a maximum penalty - of 15 months imprisonment\n" +
-        "6. A person found in possession of 100 grams or more is subject to a fine and a maximum penalty - of 25 months imprisonment"
-},
-{
-  title: "Section 34 – Supply prohibited drugs",
-  text: "1. A person who has more than 100 grams of prohibited drugs is deemed to supply prohibited drugs (Cannabis, Cocaine, MDMA/Ecstasy, Hallucinogens, Heroin, Ketamine & methamphetamine) is guilty of a crime.\n\n" +
-        "2. A person who intends/supplies another person with prohibited drugs (Cannabis, Cocaine, MDMA/Ecstasy, Hallucinogens, Heroin, Ketamine & methamphetamine) is guilty of a crime.\n\n" +
-        "Maximum penalty - 20 months imprisonment"
-},
-{
-  title: "Section 35 – Fabrication of Prohibited Drugs",
-  text: "1. A person who is found with equipment used in the proceeds of manufacturing prohibited drugs (Cannabis, Cocaine, MDMA/Ecstasy, Hallucinogens, Heroin, Ketamine & methamphetamine) is guilty of a crime\n\n" +
-        "Maximum penalty - 15 Months Imprisonment"
-},
-{
-  title: "Section 36 – Trafficking of prohibited drugs",
-  text: "1. A person who carries out the business of trafficking prohibited drugs (Cannabis, Cocaine, MDMA/Ecstasy, Hallucinogens, Heroin, Ketamine & methamphetamine) to others is guilty of a crime\n\n" +
-        "Maximum penalty - 20 months imprisonment"
-},
-{
-  title: "Section 37 – Torture",
-  text: "1. For an act to be prohibited as torture, it must involve severe pain and suffering, it must be intentionally inflicted, and it must be inflicted for a purpose referred to in the definition of the convention against torture and other cruel, inhuman or degrading treatment or punishment is guilty of a crime.\n\n" +
-        "Maximum Penalty - 40 months imprisonment"
-},
-{
-  title: "Section 38 – Threatening Violence",
-  text: "1. Any person who-\n" +
-        "   1. With intent to intimidate or annoy any person, by words or conduct threatens to hurt the person or damage their property commits a crime which carries imprisonment\n" +
-        "   2. With intent to alarm or cause harm to any person, discharge loaded firearms or do any other physical act that is likely to cause the person to reasonably fear bodily harm or damage their property;\n" +
-        "Commits a crime which carries an imprisonment.\n" +
-        "Maximum Penalty - 5 Months Imprisonment"
-},
-{
-  title: "Section 39 – Grievous Bodily Harm",
-  text: "1. A person who-\n" +
-        "   1. Causes grievous bodily harm to any person, and\n" +
-        "   2. Is reckless as to causing actual bodily harm to that or any other person, is guilty of an offence\n" +
-        "   3. In any way unlawfully wounds, does grievous bodily harm, or transmits a serious disease to, any person; or\n" +
-        "   4. Unlawfully strikes or attempts to strike, any person with any kind of projectiles or anything that will achieve that intention; or\n" +
-        "   5. Unlawfully causes any explosive substances to explode, or\n" +
-        "   6. Sends or delivers any explosives substances or other dangerous or noxious things to any person or\n" +
-        "   7. Causes any substance or thing to be taken or received by any person; or\n" +
-        "   8. Puts any destructive or explosive substances in any place; is guilty of a crime\n\n" +
-        "Maximum Penalty - 30 Months Imprisonment"
-},
-{
-  title: "Section 40 – Assault - Common Assault",
-  text: "1. Whosoever assaults any person shall be liable to a fine/imprisonment\n\n" +
-        "Maximum Penalty - 10 Months Imprisonment"
-},
-{
-  title: "Section 41 – Serious Assault",
-  text: "1. Any person who-\n" +
-        "   1. Assaults another with intent to commit a crime, or intends to resist or prevent the lawful arrest or detention of himself or herself; or\n" +
-        "   2. Assaults resists or wilfully obstructs, police officers while acting in the execution of the officer's duty, or any reason acting in aid of a police officer while so acting; or\n" +
-        "   3. Unlawfully assaults any person while the person is performing a duty imposed on the person by law; or\n" +
-        "   4. Assault any person because the person has performed a duty imposed on the person by law; or\n" +
-        "   5. Unlawfully assaults any person 60 years old or more or anymore who requires or relies on assistance, a wheelchair, or any other remedial device; is guilty of a crime\n\n" +
-        "2. If the offender assaults a government employee officer in any of the following circumstances -\n" +
-        "   1. The offender spits, bites or throws anything at a government employee;\n" +
-        "   2. The offender causes bodily harm to a government employee;\n" +
-        "   3. The offender is, or pretends to be, armed with a dangerous or offensive weapon or instrument.\n\n" +
-        "Maximum Penalty - 30 Months Imprisonment"
-},
-{
-  title: "Section 42 – Kidnapping",
-  text: "1. A person who takes or detains a person, without the person’s consent-\n" +
-        "   1. With the intention of holding the person to ransom, or\n" +
-        "   2. With the intention of committing a serious indictable offence, or\n" +
-        "   3. With the intention of obtaining any other advantage is liable to imprisonment\n\n" +
-        "Maximum Penalty - 15 Months Imprisonment"
-},
-{
-  title: "Section 43 – Murder",
-  text: "1. Any person who unlawfully kills another under any of the following circumstances is guilty of murder:\n" +
-        "   1. If the offender intends to cause the death of the person killed or that of some other person or if the offender intends to do the person killed or to some other person some grievous bodily harm;\n" +
-        "   2. If death is caused by an act done with reckless indifference to human life;\n" +
-        "   3. If death is caused by means of an act done unlawfully, which the act is likely to endanger life or health\n" +
-        "   4. If the offender intends to do grievous bodily harm to some person for the purpose of facilitating the commission of a crime;\n" +
-        "   5. If death is caused by administering an overpowering thing;\n" +
-        "   6. If death is caused wilfully by stopping the breath or the person\n\n" +
-        "Maximum Penalty - 100 Months Imprisonment"
-},
-{
-  title: "Section 44 – Attempt to Murder",
-  text: "1. Any person who-\n" +
-        "   1. Attempts to unlawfully kill another person; or\n" +
-        "   2. With intent to unlawfully kill another person or does any act that is seen to endanger human life is guilty of a crime and faces imprisonment\n\n" +
-        "Maximum Penalty - 60 Months Imprisonment"
-},
-{
-  title: "Section 45 – Punishment for Murder",
-  text: "1. Any person who commits the crime of murder is liable to imprisonment\n" +
-        "2. If the person killed was a police officer at the time the act that caused the person’s death was done or mode; and\n" +
-        "3. The person being sentenced did the act or made the commission that caused the police officer’s death when the police officer was performing his duty and the person ought to know that the person is a police officer will be liable to serve imprisonment\n" +
-        "4. Bail must be issued before the offender appears before the court"
-},
-{
-  title: "Section 46 – Self-defence against unprovoked assault",
-  text: "1. When a person is unlawfully assaulted and has not provoked the assault, it is lawful for the person to use force reasonably necessary to make the defence against the assault, if the force used is not intended and is not likely to cause death or grievous bodily harm.\n\n" +
-        "2. If the nature of the assault is such to cause death or grievous bodily harm, the person using force by way of defence believes, on reasonable grounds, that the person can not otherwise preserve the person defended from death or grievous bodily harm, it is lawful for the person to use any such force necessary to the assailants as is necessary for defence even though it caused the death of grievous bodily harm. It is upon the defendant to prove that the force is necessary."
-},
-{
-  title: "Section 47 – Self-defence against provoked assault",
-  text: "1. When a person has unlawfully assaulted another or has provoked an assault from another as such caused reasonable death or grievous bodily harm, and to induce the person to believe, on reasonable grounds, that it is necessary for the person’s preservation from death or grievous bodily harm to use the force in self-defence, the person is not criminally responsible for using any such force as is reasonably necessary for such preservation although such force may cause death or grievous bodily harm.\n\n" +
-        "2. This protection does not extend to a case in which the person who causes the death or grievous bodily harm first begins the assault with intent to kill or to do grievous bodily harm to another person. The person must decline further conflict or retreat as far as was practicable."
-},
-{
-  title: "Section 48 – Aiding in self-defence",
-  text: "1. It is lawful for any person to use force of any degree reasonable for the purpose of defending himself, herself or another person against an assault. It is lawful for any person to act in good faith to aid the person for the purpose of defending the person."
-},
-{
-  title: "Section 49 – Accessory to Murder and Attempt to Murder",
-  text: "1. Any person who becomes an accessory to murder or attempted murder is guilty of a crime and is liable for imprisonment\n\n" +
-        "Maximum Penalty - 60 Months Imprisonment"
-},
-{
-  title: "Section 50 – Going Armed so as to cause fear",
-  text: "1. Any person who goes armed in public without lawful reason in such a manner as to cause fear to any person is guilty of a misdemeanour and is liable to imprisonment for 15 months.\n\n" +
-        "2. The offender may be, and it is hereby declared that the offender is always liable to be arrested without a warrant.\n\n" +
-        "Maximum Penalty - 15 Months Imprisonment"
-},
-{
-  title: "Section 51 – Manslaughter",
-  text: "1. A person who unlawfully kills another under any of the such circumstances as not to constitute murder is guilty of manslaughter\n" +
-        "2. No intention to cause the death of the person\n\n" +
-        "Maximum Penalty - 40 Months Imprisonment"
-},
-{
-  title: "Section 52 – Stealing/Possession of Stolen Goods",
-  text: "1. A person is stealing if they fraudulently convert this possession of a person into their own.\n" +
-        "2. Any person who steals or attempts to steal anything and is found with stolen goods on them is guilty of a crime\n\n" +
-        "Maximum Penalty - 10 Months Imprisonment"
-},
-{
-  title: "Section 53 – Burglary",
-  text: "1. Any person who enters or is in the premises or dwelling of another with the intention to commit an indictable offence in the premises or dwelling is committing a crime"
-},
-{
-  title: "Section 54 – Attempted theft of a motor vehicle",
-  text: "1. A person who attempts to steal a motor vehicle that doesn’t belong to them is guilty of a crime\n\n" +
-        "Maximum Penalty - 10 Months Imprisonment"
-},
-{
-  title: "Section 55 – Theft of a Motor Vehicle",
-  text: "1. A person who steals a motor vehicle that does not belong to them is guilty of an offence\n\n" +
-        "Maximum Penalty - 15 Months Imprisonment\n\n" +
-        "2. Any person committing theft of a motor vehicle and then boosting the stolen vehicle is guilty of an offence\n\n" +
-        "Maximum Penalty - 25 Months Imprisonment"
-},
-{
-  title: "Section 56 – Arson",
-  text: "1. Any person who wilfully and unlawfully destroys or damages property by fire is guilty of a crime, and is liable to imprisonment\n\n" +
-        "Maximum Penalty - 10 Months Imprisonment"
-},
-{
-  title: "Section 57 – Trespassing on Restricted Government Property",
-  text: "1. Any person who unlawfully enters or remains in an area designated for appropriate personnel on government property is guilty of an offence.\n\n" +
-        "2. Subject to subsection (1), a government property refers to the NSW Courts, Police Stations, Government Hospitals and any other Government Owned Buildings, Area designated for appropriate personnel refers to staff-only areas/locked areas etc\n\n" +
-        "Maximum Penalty - 15 Months Imprisonment"
-},
-{
-  title: "Section 58 – Going armed to Government Property",
-  text: "1. Any person who without lawful excuse being armed enters or is found in a government property such as NSW Courts, Police Stations, Government Hospitals and any other Government-owned buildings, upon such grounds is guilty of an offence and is guilty of an offence.\n\n" +
-        "Maximum Penalty - 25 Months Imprisonment"
-},
-{
-  title: "Section 59 – Armed Robbery",
-  text: "1. Any person who is armed or pretends to be armed with any dangerous or offensive weapon or instrument at the time of the robbery is liable to imprisonment\n\n" +
-        "2. The circumstances of aggravation for an offence against this section is armed robbery of Pacific Standard, the offender is liable to imprisonment\nMaximum Penalty - 40 Months Imprisonment\n\n" +
-        "3. The circumstances of aggravation for an offence against this section is armed robbery of a Bobcat, the offender is liable to imprisonment\nMaximum Penalty - 50 Months Imprisonment\n\n" +
-        "4. The circumstances of aggravation for an offence against this section is armed robbery of a Fleeca Bank (ANZ, NAB, CommBank), the offender is liable to imprisonment\nMaximum Penalty - 25 Months Imprisonment\n\n" +
-        "5. The circumstances of aggravation for an offence against this section is armed robbery of Vangelico Jewellery, the offender is liable to imprisonment\nMaximum Penalty - 20 Months Imprisonment\n\n" +
-        "6. The circumstances of aggravation for an offence against this section is armed robbery of a Bank Truck, the offender is liable to imprisonment\nMaximum Penalty - 20 Months Imprisonment\n\n" +
-        "7. The circumstances of aggravation for an offence against this section is armed robbery of a General Store, the offender is liable to imprisonment\nMaximum Penalty - 15 Months Imprisonment\n\n" +
-        "8. The circumstances of aggravation for an offence against this section is armed robbery of an Automated Teller Machine, the offender is liable to imprisonment\nMaximum Penalty - 15 Months Imprisonment"
-},
-{
-  title: "Section 60 – Taking control of aircraft",
-  text: "1. Any person who unlawfully either directly or indirectly takes control of any aircraft that isn't licensed is guilty of a crime\n\n" +
-        "Maximum Penalty - 15 Months Imprisonment"
-},
-{
-  title: "Section 61 – Unlawful entry of a vehicle for committing an indictable offence",
-  text: "1. A person who unlawfully enters another person’s vehicle with intent to commit an indictable offence commits a crime\n\n" +
-        "2. If the offender uses or threatens the use of actual violence; or is or pretends to be armed with a dangerous or offensive weapon or instrument; the offender is liable to imprisonment\n\n" +
-        "Maximum Penalty - 5 Months Imprisonment"
-},
-{
-  title: "Section 62 – Seizing Vehicles",
-  text: "1. All vehicles have the following opportunity once they have been proven guilty of Sections (14), (15), (16);\n" +
-        "   1. First offence: Warning 3-hour impound\n" +
-        "   2. Second Offence: 6-hour impound\n" +
-        "   3. Three or More Times: 24-hour impound\n\n" +
-        "2. Police may apply for a vehicle seizure order to the courts after the vehicle has been impounded three times under Sections (14), (15), and (16) and must show evidence for each time the vehicle has been impounded.\n\n" +
-        "3. Once the vehicle has been seized by the courts, they may decide whether or not the seized vehicle’s owner will have to pay a fee or it will be auctioned off to the public"
-},
-{
-  title: "Section 63 – Escape from Lawful Custody",
-  text: "1. A person who escapes from lawful custody is guilty of a crime\n\n" +
-        "Maximum Penalty - 20 Months Imprisonment"
-},
-{
-  title: "Section 64 – Assist the escape from lawful custody",
-  text: "1. Aids a person in lawful custody to escape, or to attempt to escape from lawful custody or frees a person from lawful custody without authority is guilty of a crime.\n\n" +
-        "Maximum Penalty - 10 Months Imprisonment"
-},
-{
-  title: "Section 65 – Impersonation",
-  text: "1. A person who wears clothing that is law enforcement and or impersonates an officer is guilty of a crime\n\n" +
-        "Maximum Penalty - 30 Months Imprisonment"
-},
-{
-  title: "Section 66 – Unlawful Gambling",
-  text: "Any person who operates a place-\n" +
-        "1. For the purpose of conducting an unlawful game, the person or another person commits a crime\n" +
-        "2. Casino chips are not to be taken or removed from a licensed venue at any time if seen outside the venue, the person is, therefore, liable to a fine or imprisonment\n\n" +
-        "Games- Gambling and Betting included\n" +
-        "It is unlawful for any person to host any organised gambling or betting events at an unlicensed venue for profit. The only people exempt from this are people who apply to the courts for a gambling license. The casino is the only licensed gambling venue as of 31/10/2023"
-},
-{
-  title: "Section 67 – Official Corruption",
-  text: "1. Any person who-\n" +
-        "   1. Being employed in public service, or being a holder of any public office, and being charged with the performance of any duty by virtue of such employment, corruptly asks for, receives or obtains, or agrees or attempts to receive or obtain, any property or benefit of any kind for himself, herself or any other person.\n\n" +
-        "Maximum Penalty - 80 Months Imprisonment"
-},
-{
-  title: "Section 68 – Laundering of Cash",
-  text: "1. Any person who takes part in the conversion of marked bills/illegal goods (Marked Money) to regular bills is guilty of an offence\n\n" +
-        "2. Subject to subsection (1), to take part in includes the transport of the tainted bills/illegal goods in order to facilitate physical conversion of the tainted bills and/or anyone who supplies resources to assist in the conversion.\n\n" +
-        "Maximum Penalty - 40 Months Imprisonment"
-},
-{
-  title: "Section 69 – Outlaws",
-  text: "1. The NSW Supreme Court may issue an Outlaw Court Order on a person or group of persons after an application made by the New South Wales Police Force has been officially heard.\n\n" +
-        "2. Any individual officially named in an Outlaw Court Order as an “OutLaw” is subject to double maximum penalties stated in current legislation for any offence, including fines.\n\n" +
-        "3. Subject to subsection (2), double penalties do not apply to Section (70) and Section (71)\n\n" +
-        "4. Subject to subsection (1), an outlaw Order’s duration may be extended subject to an application made to the New South Wales Supreme Court by the New South Wales Police Force.\n\n" +
-        "5. Outlaws are subject to searches of their person and property at any time by police.\n\n" +
-        "6. Outlaws are subject to a subsequent Firearm Prohibition Order, valid until the Outlaw expires or is revoked by the New South Wales Supreme Court. Effects seen in Section (29)\n\n" +
-        "7. Individuals not named in an Outlaw Order who make contact and associate with an Outlaw, knowingly or not, are subject to extensive investigation by police and may be charged with offences\n\n" +
-        "8. All clothing, accessories and media that represent an Outlawed person or group are prohibited and are to be seized or destroyed by police.\n\n" +
-        "9. Properties and/or businesses owned or exclusively used by outlaws may be seized by police for the duration of the Outlaw subject to an application made by the New South Wales Police Force.\n\n" +
-        "10. Phones and radios may be frequently reviewed by police to evaluate if criminal consorting has occurred.\n\n" +
-        "11. Subject to subsection (7), individuals may be added to or removed from Outlaw Orders subject to a police application to the New South Wales Supreme Court"
-},
-{
-  title: "Section 70 – Participation in Organised Crime",
-  text: "1. A person who-\n" +
-        "   1. Is a participant in an outlawed criminal organisation; or\n" +
-        "   2. Is actively involved in an organised crime with an outlaw/an outlawed criminal organisation; or\n" +
-        "   3. Recruits or attempts to recruit, another person to become, or associate with, a participant in an outlawed criminal organisation;\n" +
-        "Commits a Misdemeanour\n\n" +
-        "2. Any individual who represents, advocates or displays an Outlawed Criminal Organization through the use of clothing, accessories or media, commits an offence\n\n" +
-        "Maximum Penalty - 60 Months Imprisonment"
-},
-{
-  title: "Section 71 – Criminal Consorting",
-  text: "1. Any individual named in an Outlaw Court Order, provided by the NSW Supreme Court, that associates, involves or communicates in any way with at least 2 other individuals named in the Outlaw commits an offence.\n\n" +
-        "2. Subject to subsection (1), individuals under an Outlaw are excepted if contact is made without the intention of doing so. Upon which, the individuals must disassociate as soon as reasonably possible or an offence has been committed.\n\n" +
-        "3. Police may search individuals they reasonably suspect have consorted, are consorting or is likely to consort with one or more recognised Outlaws.\n\n" +
-        "4. Individuals who associate, communicate, or interact with an Outlawed person for the purpose of facilitating communication between other Outlawed persons commit an offence\n\n" +
-        "Maximum Penalty - 60 Months Imprisonment"
-},
-{
-  title: "Section 72 – Fraud",
-  text: "1. A person who, by any deception, dishonestly–\n" +
-        "   1. Obtains property belonging to another, or\n" +
-        "   2. Obtains any financial advantages or causes any financial disadvantage, is guilty of the offence of fraud\n\n" +
-        "Maximum Penalty - 20 Months Imprisonment"
-},
-{
-  title: "Section 73 – Contempt of Court",
-  text: "1. Any person who causes a disturbance in court that affects any court hearing is subject to contempt of court and is guilty of a crime\n\n" +
-        "Maximum Penalty - 20 Months Imprisonment"
-},
-{
-  title: "Section 74 – Unpaid Fines",
-  text: "1. This section applies to any person who has received a police fine or a court bill\n\n" +
-        "2. If the person has received a fine but is contrasting the matter, the person is not required to pay the fine pending the outcome of their matter\n\n" +
-        "3. A person may have their assets seized by a court and the assets owned by the debtor will be auctioned off for whatever amount is necessary to recover unpaid fines or bills\n\n" +
-        "4. If a person does not have any assets to seize, police may request for a judicial officer to impose an imprisonment period of 10 months per fine\n\n" +
-        "5. A person has 7 days to pay a fine upon a fine being issued. If the person fails to pay a fine in the allotted time their assets may be seized by the police subject to an application made to the courts\n\n" +
-        "6. If the offender has committed further offences during the 1 week, and the person has unpaid fines on them, judicial officers may impose an imprisonment period of 1 month per $1000 unpaid, there is no maximum amount of time\n\n" +
-        "7. If a person has trouble paying off their unpaid fines, place contact the courts within 24 hours after receiving the fine so they courts can assist you."
-},
-{
-  title: "Section 75 – Extortion",
-  text: "1. Any person who, without reasonable cause, makes a demand with the intention to gain a benefit for any person; or causes a detriment to any person other than the person who is the demander; commits a crime.\n\n" +
-        "Maximum Penalty - 20 Months.\n" +
-        "If carrying out threats causes, or would be likely to cause, serious personal injury to another person - 30 Months Imprisonment"
-},
-{
-  title: "Section 76 – Breach of Bail",
-  text: "1. If a person breaches any of their bail conditions they may be given a warning or be charged with breach of bail. It is up to the discretion of the officers dealing with the incident and the seriousness of the breach.\n\n" +
-        "2. The person shall be charged with breach of bail and fined double the amount of the charge being laid on them\n\n" +
-        "3. A defendant must not breach any conditions may include:\n" +
-        "   1. Appears in accordance with the person’s bail and surrenders into custody; or\n" +
-        "   2. While released on bail does not-\n" +
-        "      * Commit an offence; or\n" +
-        "      * Endanger the safety or welfare of members of the public; or\n" +
-        "      * Interfere with the witnesses or otherwise obstruct the course of the justice whether in relation to the person for another person; or\n" +
-        "      * Any other special conditions which could include bail with surety which must be complied with;\n" +
-        "Subject to the provisions above, the Court or police officers shall impose such conditions as the court or police officer thinks fit for any or all such purposes"
-},
-{
-  title: "Section 77 – Illegal Goods in Custody",
-  text: "1. A person who has anything in their custody which may reasonably be suspected of being stolen or otherwise unlawfully obtained, commits a crime\n\n" +
-        "   1. If the goods were obtained by the way of an act constituting a crime - 10 months imprisonment; or\n" +
-        "   2. If the goods are a firearm or ammunition - 10 months imprisonment; or\n" +
-        "   3. If the offender obtains or received the goods under a license - 10 months imprisonment\n" +
-        "   4. If the goods were illicitly obtained cash (“Marked Money”) up to\n" +
-        "      $100 - $30,000 - 10 Months Imprisonment\n" +
-        "      $30,000 - $100,000 - 15 Months Imprisonment\n" +
-        "      $100,000 - $500,000 - 25 Months Imprisonment\n" +
-        "      $500,000 - $1,000,000 - 40 Months Imprisonment"
-},
-{
-  title: "Section 78 – The arrest of Wrong Person",
-  text: "1. A person who, being duly authorised to execute a warrant to arrest a person, believing in good faith and reasonable ground that the person arrested is the person named in the warrant, is not criminally responsible for doing so to any greater extent than if the person arrested has been the person named in the warrant\n\n" +
-        "2. Any person who lawfully assists in making an arrest, believing that the person arrest is the person named in the warrant, or who, being required by the warrant to receive and detain the person named in it, receives and detains the person so arrested, is not criminally responsible.\n\n" +
-        "3. If a public officer unduly arrests or detains an individual without offering reasons, in good faith or holds reasonable belief on reasonable grounds. Arresting another without lawful justification is deemed to have made an unlawful arrest. The person in detainment must file a complaint to the Police Cabinet, Australian Federal Police and the courts in order for any proceedings to occur. The public officer may be liable to imprisonment for up to 20 months."
-},
-{
-  title: "Section 79 – Duty of Persons Arresting",
-  text: "1. It is the duty of a person executing any process or warrant to have it with him or her, if reasonably practised, and to produce it if required.\n\n" +
-        "2. It is the duty of a person arresting another, with or without a warrant to give notice, if practicable, of the process or warrant under which the person is acting or of the cause of the arrest\n\n" +
-        "3. A failure is acting either of the aforesaid duties does not of itself make the execution of the process or warrant of the arrest unlawful"
-},
-{
-  title: "Section 80 – Force Used in Executing Process or in Arrest",
-  text: "1. It is lawful for a person who is engaged in the lawful execution of any sentence, process or warrant, or in making any arrest, and for any person lawfully assisting the person, to use such force as may be reasonably necessary to overcome any force used in resisting such execution or arrest"
-},
-{
-  title: "Section 81 – Police Powers to Enter Dwelling/Premises",
-  text: "1. A police officer may enter a dwelling/premises to arrest or detain a person only if the police officer believes on reasonable grounds that the person to be arrested or detained is in the dwelling/premises.\n\n" +
-        "2. Police may only search the dwelling/premises for the person/s who may be hiding within the dwelling premises.\n\n" +
-        "3. If police find any illegal item within the dwelling/premises. Police must apply for a warrant to continue to search throughout the dwelling/premises."
-},
-{
-  title: "Section 82 – Defective Vehicle",
-  text: "1. A vehicle is defective if-\n" +
-        "   1. A part of the vehicle-\n" +
-        "      i) Does not comply with vehicle standards set by the police; or\n" +
-        "      ii) Does not perform its intended function; or\n" +
-        "      iii) Has deteriorated to an extent that it can not be reasonably relied on to perform its intended function\n\n" +
-        "   2. Equipment fitted by the vehicle standards does not comply with the requirements specified in the vehicle standards and does not perform its intended function; or\n" +
-        "   3. Optional equipment fitted by the vehicle standards does not comply with the requirement specified in the vehicle standards and does not perform its intended function; or\n" +
-        "   4. The vehicle is unsafe"
-},
-{
-  title: "Section 83 – Defect Notices",
-  text: "1. A vehicle that is defective may be issued a defect notice by an authorised officer if they reasonably believe;\n" +
-        "   1) That the vehicle is defective; or\n" +
-        "   2) That a vehicle is not defective, but that driving or parking it on a road would seem to be defective\n\n" +
-        "2. The defective notice may be given to the vehicle’s owner or the person who is driving the vehicle when the defective notice was issued, whether or not if the driver is the owner.\n\n" +
-        "3. The defect notice may require the owner or driver of the vehicle to remove or repair the defective items within a specified time frame. Failure to comply with the notice may result in further penalties, including fines or impounding of the vehicle up to 72 hours\n\n" +
-        "4. The decision to impound a vehicle is at the discretion of the police officer based on the severity of the defect or modification and the risk it poses to the safety of the driver and other road users. It is always advisable to comply with the defect notice and make the necessary repairs or modifications to ensure the safety of the vehicle and its occupants"
-},
-{
-  title: "Section 84 – Identification and Modification Plates",
-  text: "1. A person must not, without the court’s approval\n" +
-        "   1) Alter or deface an identification plate from a vehicle; or\n" +
-        "   2) Remove an identification plate from a vehicle"
-},
-{
-  title: "Section 85 – Modifying Vehicle",
-  text: "1. A person must not-\n" +
-        "   1. Modify a vehicle, its parts or equipment in a way that may adversely affect the safety of a vehicle\n" +
-        "   2. Fit a light or reflector to a vehicle unless the light or reflector is required to be fitted.\n\n" +
-        "Some of the examples include:\n" +
-        "   i) Removing the bonnet/hood of the vehicle\n" +
-        "   ii) Removing a bumper\n" +
-        "   iii) Neon Underglows\n" +
-        "   iv) Removing headlights/parking lights/tail lights\n" +
-        "   v) Lowrider hydraulics\n\n" +
-        "2. A person does not contravene this section if-\n" +
-        "   1) The modification complies with the approval of the courts, or\n" +
-        "   2) The vehicle is not to be used on the road"
-},
-{
-  title: "Section 86 – Vehicle Turning Ability",
-  text: "1. A motor vehicle must not be able to turn in a circle and the wheels must clearly not scrape the bumper/fender when turning the wheels left or right"
-},
-{
-  title: "Section 87 – Protrusions",
-  text: "1. A thing fitted to a vehicle must be designed and built to fit the vehicle and will minimise any safety hazards."
-},
-{
-  title: "Section 88 – Driver’s View and Vehicle Control",
-  text: "1. A motor vehicle must be built to allow the driver a view of the road on the front and sides of the vehicle so that the driver can drive the vehicle safely."
-},
-{
-  title: "Section 89 – Seating",
-  text: "1. A seat for a driver or a passenger in a vehicle must be attached to the vehicle."
-},
-{
-  title: "Section 90 – Windscreen and Window Tints",
-  text: "1. Glazing used in a windscreen or windows of a motor vehicle must have visibility of at least 50% where an officer can see through the windows and make known the drivers and passengers of a vehicle without disruption. (Anything below Light Smoke is usually fine, exceptional for some vehicles- anything with a clear front windscreen and side full black windows are illegal)\n\n" +
-        "2. There are exemptions to this where the court has given authorisation for an applicant to tint their vehicle for personal reasons under this act."
-},
-{
-  title: "Section 91 – Tyres",
-  text: "1. If a tyre is deemed to have deflated or if a vehicle is running on its rims, the vehicle is deemed to be defective."
-},
-{
-  title: "Section 92 – Headlights",
-  text: "1. A motor vehicle must be fitted with a pair of functioning headlights. If there is only one functional headlight, the vehicle is deemed defective"
-},
-{
-  title: "Section 93 – How Persons Must Travel in a Motor Vehicle",
-  text: "1. A person must not travel in or part of a motor vehicle that is not designed primarily for the carriage of passengers\n\n" +
-        "2. A person must not drive with a passenger on them and must not drive with a passenger if any part of the passenger’s body is outside a window or door of the vehicle."
-},
-{
-  title: "Section 94 – Parking/Tail Lights",
-  text: "1. A motor vehicle must be fitted with a pair of functioning parking lights or tail lights, if there is only one functioning parking/tail light, the vehicle is defective."
-},
-{
-  title: "Section 95 – Robbery",
-  text: "1. Any person who steals anything, at or immediately before or immediately after the time of stealing, uses or threatens the use of actual violence to any person or property to obtain the thing stolen or prevent resistance to the item or something being stolen is guilty of robbery.\n\n" +
-        "Maximum Penalty - 10 Months Imprisonment"
-},
-{
-  title: "Section 96 – Vandalism",
-  text: "1. Any person/s who intentionally or recklessly destroys or damages property belonging to another."
-},
-{
-  title: "Section 97 – Attempted Robbery",
-  text: "1. Any person who assaults any person with the intent to steal anything, and, at or immediately before or immediately after the assault, uses or threatens to use actual violence to any person or property to obtain the thing intended to be stolen or prevented resistance to the item capable of being stolen is guilty of a crime.\n\n" +
-        "Maximum Penalty - 10 Months Imprisonment"
-},
-{
-  title: "Section 98 – Cruelty to Law Enforcement Animal",
-  text: "1. Any person/s who intentionally kills or injuries an animal used for law enforcement is guilty of an offence\n" +
-        "   1. If any person/s injuries that animal (animal means a dog) and it is being used by a government employee in their duties is guilty of an offence.\n" +
-        "Maximum Penalty - 10 Months Imprisonment\n\n" +
-        "   2. If any person/s kills that animal (animal means a dog) and it is being used by a government employee in their duties is guilty of an offence.\n" +
-        "Maximum Penalty - 20 Months Imprisonment"
-},
-{
-  title: "Section 99 – Damage to Government Property",
-  text: "1. Any person/s who intentionally or recklessly destroys or damages government property is guilty of an offence\n\n" +
-        "Maximum Penalty - 5 Months Imprisonment"
-},
-{
-  title: "Section 100 – Aiding to Abetting",
-  text: "1. A person who aids, abets, counsels or procures the commission of an offence by another person is taken to have committed that offence and is punishable accordingly\n" +
-        "   1. The person’s conduct must have in fact aided, abetted, counselled or procured the commission of the offence by the other person; and\n" +
-        "   2. The offence must have been committed by the other person\n\n" +
-        "Maximum Penalty - 15 Months Imprisonment"
-},
-{
-  title: "Section 101 – Unlawful Custody of a Person by Officers/Persons",
-  text: "1. Any person who detains or assumes the custody of another without proper certification or material, particularly without justification or reason is guilty of a misdemeanour and is liable to imprisonment for 10 months."
-},
-{
-  title: "Section 102 – Terrorist Acts - May Carry Mandatory Imprisonment",
-  text: "1. A person commits an offence if the person engages in terrorist acts.\n\n" +
-        "2. Mandatory penalty - 4 days + judicial discretion to go higher, a person charged with terrorism must be seen before the court before sentencing and must be remanded in custody till a hearing\n\n" +
-        "3. Once a person has been convicted of terrorism, they will receive a stop and search order, for 1 month, and will be required to wear an anklet for 1 month\n" +
-        "   1. Stop and Search order, consists of officers being able to stop and search the convicted terrorist and if in a vehicle, search the vehicle and all occupants.\n\n" +
-        "4. The action is done or the threat is made with the intention of advancing a political, religious or ideological cause; and\n" +
-        "   1. The action is done or the threat is made with the intention of:\n" +
-        "      i) Coercing, or influencing by intimidation, the government of the state; and intimidating the public or a section of the public\n" +
-        "OR\n" +
-        "   a) The action falls under this section if it:\n" +
-        "      i) Causes serious harm that is physical harm to a person, or\n" +
-        "      ii) Causes serious damage to property, or\n" +
-        "      iii) Causes a person’s death, or\n" +
-        "      iv) Endangers a person’s life, other than the life of the person taking the action; or\n" +
-        "      v) Creates a serious risk to the health and safety of the public"
-},
-{
-  title: "Section 103 – Riot",
-  text: "1. If-\n" +
-        "   1. 10 or more people who are present together use or threaten to use unlawful violence to a person or property for a common purpose, and\n" +
-        "   The conduct taken together would cause a person in the vicinity to reasonably fear for their personal safety; Each of the assembled persons commits the crime of taking part in a riot.\n\n" +
-        "Maximum Penalty - 15 Months Imprisonment"
-},
-{
-  title: "Section 104 – Attempting to Destroy Property and or Injure by Explosive or Noxious Substances",
-  text: "1. Any person who unlawfully, with intent to do any bodily harm or injure another by putting explosives or noxious substances in any place whatsoever, is guilty of a crime.\n\n" +
-        "2. Any person who unlawfully, with the intention to destroy or to damage any property, puts an explosive substance, device or instrument in any place is guilty of a crime\n\n" +
-        "Maximum Penalty - 60 Months Imprisonment"
-},
-{
-  title: "Section 105 – Bomb Hoaxes",
-  text: "1. Any person who places or sends an article or substance in any place or any way, with the intention to induce the person to believe that the article or substance is likely to explode, ignite or discharge a dangerous or noxious substance, commits a crime.\n\n" +
-        "Maximum Penalty - 40 Months Imprisonment\n\n" +
-        "2. Any person, who conveys information that he or she knows is false with the intention of inducing a person to believe that there is an explosive or noxious substance at any place where or whatever, commits a crime.\n\n" +
-        "Maximum Penalty - 40 Months Imprisonment"
-},
-{
-  title: "Section 106 – Destroy or Damage Property With Explosives",
-  text: "1. Any person who unlawfully, destroys or damages any property, or puts an explosive substance, device or instrument in any place is guilty of a crime.\n\n" +
-        "Maximum Penalty - 70 Months Imprisonment"
-},
-{
-  title: "Section 107 – Computer Hacking and Misuse",
-  text: "1. If a person intends to cause detriment or damage or to gain a benefit from hacking a software device or any type of electronic device commits a crime and is liable to imprisonment\n\n" +
-        "Maximum Penalty - 10 months Imprisonment"
-},
-{
-  title: "Section 108 – Bribery of a Public Officer",
-  text: "1. Any person who-\n" +
-        "   1. Attempts to influence an employee of the NSW Government in the person’s vote, opinion, judgement or action within the NSW Government to obtain further benefits from himself, herself or to any others is guilty of a crime and is liable to imprisonment\n\n" +
-        "Maximum Penalty - 5 Months Imprisonment"
-},
-{
-  title: "Section 109 – Discharging Firearm in a Public Area",
-  text: "1. A person who discharges a firearm in public without reasonable excuse is guilty of a crime and is liable to imprisonment.\n\n" +
-        "Maximum Penalty - 10 Months Imprisonment"
-},
-{
-  title: "Section 110 – Illegal Fishing",
-  text: "1. A person who is found fishing at a non-elected regulated fishing zone is guilty of a crime and punishable with a fine.\n\n" +
-        "2. A person who is found fishing in a non-regulated fishing zone will have all fish confiscated on their person.\n\n" +
-        "3. Elected regulated fishing zones;\n" +
-        "   1. Oceans\n" +
-        "   2. Lakes\n" +
-        "   3. Rivers\n" +
-        "   4. Dams"
-},
-{
-  title: "Section 111 – No Fly Zones",
-  text: "1. Anyone in an air vehicle within a “No Fly Zone” can and will be met with the necessary force to disable the aircraft by authorities\n\n" +
-        "2. Current No Fly Zones consist of any government facility without authorisation from a ranking member within the facility\n\n" +
-        "Maximum Penalty - 30 Months Imprisonment"
-},
-{
-  title: "Section 112 – Possession of Government Equipment",
-  text: "1. Government equipment refers to any item, device, or instrument designed, intended, or commonly used by government employees in the performance of their official duties\n\n" +
-        "2. Government employee refers to an individual duly employed by a recognised governing body and authorised to carry and use government equipment in the course of their duties\n\n" +
-        "Maximum Penalty - 90 Months Imprisonment"
-}
+      { title: "Section 12 – Driving Under the Influence / PCA Offences", text: "1. A person who is driving a motor vehicle under the influence of:\n   1) Alcohol, or\n   2) Prohibited Drugs\n   commits an offence.\n\n2. A person who operates a vehicle must return a Blood Alcohol Concentration (BAC) of 0.05 or less to be legally driving.\n\n3. Low-Range PCA: A driver with a blood alcohol level between 0.05 and 0.079.\n\n4. Mid-Range PCA: A driver with a blood alcohol level between 0.08 and 0.149.\n\n5. High-Range PCA: A driver with a BAC above 0.15. Maximum penalty – 10 months imprisonment; driving licence suspended for up to 48 hours by police.\n\n6. Any person who has traces of drugs in their system while driving commits an offence. Maximum penalty – 10 months imprisonment; driving licence suspended up to 48 hours by police." },
+      { title: "Section 13 – Reckless Driving", text: "1. A person driving in a manner that is unsafe and reckless with no regard for other road users commits an offence. This may include but is not limited to:\n   1) Driving that could harm others\n   2) Doing burnouts\n   3) Cutting corners while turning\n\n2. A person found guilty under subsection (1) is liable to a fine and 12 demerit points." },
+      { title: "Section 14 – Evasion of Police", text: "1. A person who attempts to flee from police or is fleeing from police commits a crime.\n\n2. Fleeing from police may include but is not limited to:\n   1) Running away on foot\n   2) Driving a motor vehicle\n\n3. If a person evades police using a motor vehicle they are liable to a fine and imprisonment along with 15 demerit points. First offence: verbal warning to the vehicle owner. Second offence: vehicle can be impounded for up to 3 hours.\n\n4. A NSWPF Sergeant+ may approve up to 48 hours impoundment.\n\n5. A NSWPF Inspector+ may approve up to 72 hours impoundment.\n\nMaximum Penalty – 10 months imprisonment." },
+      { title: "Section 15 – Reckless Evasion of Police", text: "1. A person who attempts to flee from police and in the process puts others' lives at risk is guilty of a crime.\n\n2. Reckless evasion may involve but is not limited to:\n   1) Excessive speeding\n   2) Driving on the wrong side of the road\n   3) Driving on sidewalks\n   4) Cutting corners at intersections\n   5) Ramming of vehicles\n\n3. If a person evades police using a motor vehicle they are liable to a fine and imprisonment along with 20 demerit points. First offence: verbal warning to the vehicle owner. Second offence: vehicle can be impounded for up to 3 hours.\n\n4. A NSWPF Sergeant+ may approve up to 48 hours impoundment.\n\n5. A NSWPF Inspector+ may approve up to 72 hours impoundment.\n\nMaximum Penalty – 10 months imprisonment." },
+      { title: "Section 16 – Racing and Speed Trials", text: "1. Any person who organises, promotes, or takes part in:\n   1) Any races between vehicles on the road; or\n   2) Any attempt to establish or break any vehicle records on the road; or\n   3) Any trial of speed on the road; or\n   4) Any competitive trial on the road to test their skills or for a benefit or advantage of anything in value;\n\n2. Is guilty of an offence, unless prior written permission has been obtained from a NSWPF Inspector+ or approval from the Traffic and Highway Patrol supervisor or the courts.\n\nMaximum Penalty – 10 months imprisonment." },
+      { title: "Section 17 – Failure to Follow a Lawful Order", text: "1. Any person who fails to follow a lawful order from an officer commits a breach and is guilty of a crime.\n\nMaximum Penalty – 5 months imprisonment." },
+      { title: "Section 18 – Failure to Provide Identification / Providing False Information", text: "1. Any person who fails to provide a valid ID upon request from a Law Enforcement Officer is guilty of a crime.\n   - A person is only required to provide identification if police reasonably suspect they have committed an offence or are driving a motor vehicle.\n\n2. Acceptable forms of identification include but are not limited to:\n   1) Driver's Licence\n   2) Gun Licence\n   3) Photo ID Card\n\n3. A person who provides a false name and/or identification to police when requested is guilty of a crime.\n\n4. A police officer may arrest a person in order to make enquiries to establish their identity.\n\n5. Any person who gives information to any government employee/official (including in a document) that the person knows is false or misleading in a material particular is guilty of a crime.\n\nMaximum Penalty – 5 months imprisonment." },
+      { title: "Section 19 – Hinder Police in Execution of Duties", text: "1. A person commits an offence under this section when they (including but not limited to):\n   1) Refuse to leave the crime scene\n   2) Block officer's movements\n   3) Interfere in an active situation, including pursuits\n\n2. Any person found guilty under subsection (1) commits a crime.\n\nMaximum Penalty – 5 months imprisonment." },
+      { title: "Section 20 – Resisting Arrest", text: "1. A person who resists, or incites another person to resist, a police officer in the execution of the officer’s duty commits an offence.\n\nMaximum Penalty – 5 months imprisonment." },
+      { title: "Section 21 – Public Intoxication / Disorderly Conduct", text: "1. A person who is under the influence of alcohol or drugs in public and acting in a manner that isn’t suitable is in violation. This includes but is not limited to:\n   1) Being naked in public\n   2) Being drunk in public\n   3) Being high in public." },
+      { title: "Section 22 – Trespass", text: "1. A person must not enter into, or remain in, someone’s house, yard, or business premises without their permission unless they have a lawful reason to be there." },
+      { title: "Section 23 – Public Nuisance", text: "1. A person commits a public nuisance offence if:\n\n2. The person behaves in:\n   1) A disorderly way, or\n   2) An offensive way, or\n   3) A threatening way, or\n   4) A violent way, and\n\n3. The person’s behaviour begins or is likely to interfere with the enjoyment or passage of any members of the public." },
+      { title: "Section 24 – Illegal Hunting", text: "1. A person is found guilty of unlawfully hunting when:\n   1) Hunting without a firearms license\n   2) Using an illegal firearm\n   3) Hunting outside of hunting reserves\n   4) Inhumanely killing animals\n   5) In an unsafe manner\n   6) Poaching protected species\n\n2. Subject to subsection 1, hunting reserves within New South Wales are hills/forestry located at Paleto Bay Forest. Hunting within a Main Rd, or local suburbs/cities is called unlawful hunting and if caught are liable to fines.\n\n3. Subject to subsection 1, protected species are as listed:\n   1) Boar\n   2) Hen\n   3) Cat\n   4) Dog\n   5) Monkey" },
+      { title: "Section 25 – Firearms Licenses", text: "1. A person may have their firearms license revoked when committing an offence that involves the use of a firearm in an offensive manner:\n   1) A first offence of disqualification will require the person to contact the police after 4 days to reinstate the license\n   2) A second offence of disqualification will require the person to contact the police after 7 days to reinstate the license\n   3) The third offence of disqualification will require the person to contact the police after 14 days to reinstate the license\n\n2. After the third offence, any person must then be seen before a judge for possible reinstatement of their license." },
+      { title: "Section 26 – Brandishing a Weapon in Public", text: "1. A person who publicly displays a sharp/blunt weapon in the public eye, or in any other place so as to endanger the life of any other person is guilty of a crime.\n\n2. A person who publicly displays a firearm out in the public eye, or in any other place so as to endanger the life of any other person is guilty of a crime.\n\nMaximum Penalty – 5 months imprisonment." },
+      { title: "Section 27 – Possession of Illegal Weapons", text: "1. Any weapons not purchasable from a gun store (Ammu-Nation) are deemed illegal.\n\n2. Any person found in possession of an illegal melee weapon(s) (any melee weapon that can’t be obtained legally from an Ammu-Nation) is guilty of an offence.\n\n3. Any person found in possession of an illegal firearm(s) (any pistol that can be obtained legally from an Ammu-Nation) is guilty of an offence.\n\nMaximum Penalty – 10 months imprisonment.\n\n4. Any person found in possession of an illegal high calibre (2-handers/long arms) (e.g. Shotguns, Assault Rifles, SMG and other automatic weapons) is guilty of an offence.\n\nMaximum Penalty – 20 months imprisonment." },
+      { title: "Section 28 – Discharging a Firearm with Intent", text: "1. Intent to cause bodily harm: A person who–\n   1) Discharges any firearm or other loaded arms, or\n   2) Attempts to discharge any firearm or other loaded arms, with intent to cause grievous bodily harm to any person is guilty of an offence.\n\n2. Intent to resist arrest etc: A person who–\n   1) Discharges any firearm or other loaded arms, or\n   2) Attempts to discharge any firearm or other loaded arms, with intent to resist or prevent his or her (or another person’s) lawful arrest or detention, is guilty of an offence.\n\nMaximum penalty – 20 Months imprisonment." },
+      { title: "Section 29 – Effects of Firearm Prohibition Order", text: "1. Prohibition on persons acquiring, possessing or using firearms, firearm parts or ammunition.\n\n2. A person who is subject to a firearm prohibition order must not acquire, possess or use a firearm.\n\n3. A person may only be searched on their person at any time if an FPO is imposed on them.\n\n4. If firearms, firearm parts or ammunition are found on the person they are then found guilty of a crime and in breach of their FPO.\n\nMaximum penalty – 30 months imprisonment." },
+      { title: "Section 30 – Possession of Unauthorised Equipment", text: "1. The judicial officers may deem any equipment illegal if the item or equipment is not to be possessed by an ordinary person.\n\n2. Some of the equipment that are deemed illegal are gun holsters, bulletproof vests, handcuffs, and military/tactical attire.\n\n3. Police may search a person if seen wearing and confiscate any items deemed illegal and may remove any and all weapons/firearms on the person.\n\n4. Any person in possession of unauthorised equipment is liable to imprisonment.\n\nMaximum penalty – 5 months imprisonment." },
+      { title: "Section 31 – Manufacturing of Illegal Weapons", text: "1. Any person who is unlawfully producing/manufacturing or involved in the process of producing/manufacturing illegal firearms (2-handers/long arms) (e.g. shotguns, assault rifles, SMG’s & other automatic weapons, also any Pistols and melee weapons that can’t be found in an Ammu-Nation) is guilty of an offence.\n\nMaximum Penalty – 50 Months imprisonment." },
+      { title: "Section 32 – Supply of Weapons", text: "1. Any person who carries out the business of supplying and/or distributing weapons who isn’t a licenced weapon dealer (Ammu-Nation) is guilty of an offence.\n\nMaximum Penalty – 25 Months Imprisonment." },
+      { title: "Section 33 – Possession of Prohibited Drugs", text: "1. A person who is found with prohibited drugs (Cannabis, Cocaine, MDMA/Ecstasy, Hallucinogens, heroin, Ketamine & Methamphetamine) on them or in their possession is guilty.\n\n2. A person found in possession of 5 grams or less is subject to a fine.\n3. A person found in possession of more than 5 grams is subject to a fine and imprisonment.\n4. A person found in possession of 20 grams or more is subject to a fine and a maximum penalty of 10 months imprisonment.\n5. A person found in possession of 50 grams or more is subject to a fine and a maximum penalty of 15 months imprisonment.\n6. A person found in possession of 100 grams or more is subject to a fine and a maximum penalty of 25 months imprisonment." },
+      { title: "Section 34 – Supply Prohibited Drugs", text: "1. A person who has more than 100 grams of prohibited drugs is deemed to supply prohibited drugs (Cannabis, Cocaine, MDMA/Ecstasy, Hallucinogens, Heroin, Ketamine & methamphetamine) is guilty of a crime.\n\n2. A person who intends/supplies another person with prohibited drugs (Cannabis, Cocaine, MDMA/Ecstasy, Hallucinogens, Heroin, Ketamine & methamphetamine) is guilty of a crime.\n\nMaximum penalty – 20 months imprisonment." },
+      { title: "Section 35 – Fabrication of Prohibited Drugs", text: "1. A person who is found with equipment used in the process of manufacturing prohibited drugs (Cannabis, Cocaine, MDMA/Ecstasy, Hallucinogens, Heroin, Ketamine & methamphetamine) is guilty of a crime.\n\nMaximum penalty – 15 Months Imprisonment." },
+      { title: "Section 36 – Trafficking of Prohibited Drugs", text: "1. A person who carries out the business of trafficking prohibited drugs (Cannabis, Cocaine, MDMA/Ecstasy, Hallucinogens, Heroin, Ketamine & methamphetamine) to others is guilty of a crime.\n\nMaximum penalty – 20 months imprisonment." },
+      { title: "Section 37 – Torture", text: "1. For an act to be prohibited as torture, it must involve severe pain and suffering, it must be intentionally inflicted, and it must be inflicted for a purpose referred to in the convention against torture and other cruel, inhuman or degrading treatment or punishment is guilty of a crime.\n\nMaximum Penalty – 40 months imprisonment." },
+      { title: "Section 38 – Threatening Violence", text: "1. Any person who–\n   1) With intent to intimidate or annoy any person, by words or conduct threatens to hurt the person or damage their property commits a crime which carries imprisonment\n   2) With intent to alarm or cause harm to any person, discharge loaded firearms or do any other physical act that is likely to cause the person to reasonably fear bodily harm or damage their property; commits a crime which carries imprisonment.\n\nMaximum Penalty – 5 Months Imprisonment." },
+      { title: "Section 39 – Grievous Bodily Harm", text: "1. A person who–\n   1) Causes grievous bodily harm to any person, and\n   2) Is reckless as to causing actual bodily harm to that or any other person, is guilty of an offence\n   3) In any way unlawfully wounds, does grievous bodily harm, or transmits a serious disease to, any person; or\n   4) Unlawfully strikes or attempts to strike, any person with any kind of projectiles or anything that will achieve that intention; or\n   5) Unlawfully causes any explosive substances to explode, or\n   6) Sends or delivers any explosives substances or other dangerous or noxious things to any person or\n   7) Causes any substance or thing to be taken or received by any person; or\n   8) Puts any destructive or explosive substances in any place; is guilty of a crime.\n\nMaximum Penalty – 30 Months Imprisonment." },
+      { title: "Section 40 – Assault – Common Assault", text: "1. Whosoever assaults any person shall be liable to a fine/imprisonment.\n\nMaximum Penalty – 10 Months Imprisonment." },
+      { title: "Section 41 – Serious Assault", text: "1. Any person who–\n   1) Assaults another with intent to commit a crime, or intends to resist or prevent the lawful arrest or detention of himself or herself; or\n   2) Assaults resists or wilfully obstructs, police officers while acting in the execution of the officer's duty, or any reason acting in aid of a police officer while so acting; or\n   3) Unlawfully assaults any person while the person is performing a duty imposed on the person by law; or\n   4) Assault any person because the person has performed a duty imposed on the person by law; or\n   5) Unlawfully assaults any person 60 years old or more or anyone who requires or relies on assistance, a wheelchair, or any other remedial device; is guilty of a crime.\n\n2. If the offender assaults a government employee officer in any of the following circumstances –\n   1) The offender spits, bites or throws anything at a government employee;\n   2) The offender causes bodily harm to a government employee;\n   3) The offender is, or pretends to be, armed with a dangerous or offensive weapon or instrument.\n\nMaximum Penalty – 30 Months Imprisonment." },
+      { title: "Section 42 – Kidnapping", text: "1. A person who takes or detains a person, without the person’s consent–\n   1) With the intention of holding the person to ransom, or\n   2) With the intention of committing a serious indictable offence, or\n   3) With the intention of obtaining any other advantage is liable to imprisonment\n\nMaximum Penalty – 15 Months Imprisonment." },
+      { title: "Section 43 – Murder", text: "1. Any person who unlawfully kills another under any of the following circumstances is guilty of murder:\n   1) If the offender intends to cause the death of the person killed or that of some other person or if the offender intends to do the person killed or to some other person some grievous bodily harm;\n   2) If death is caused by an act done with reckless indifference to human life;\n   3) If death is caused by means of an act done unlawfully, which the act is likely to endanger life or health\n   4) If the offender intends to do grievous bodily harm to some person for the purpose of facilitating the commission of a crime;\n   5) If death is caused by administering an overpowering thing;\n   6) If death is caused wilfully by stopping the breath or the person\n\nMaximum Penalty – 100 Months Imprisonment" },
+      { title: "Section 44 – Attempt to Murder", text: "1. Any person who–\n   1) Attempts to unlawfully kill another person; or\n   2) With intent to unlawfully kill another person or does any act that is seen to endanger human life is guilty of a crime and faces imprisonment\n\nMaximum Penalty – 60 Months Imprisonment" },
+      { title: "Section 45 – Punishment for Murder", text: "1. Any person who commits the crime of murder is liable to imprisonment\n2. If the person killed was a police officer at the time the act that caused the person’s death was done or mode; and\n3. The person being sentenced did the act or made the commission that caused the police officer’s death when the police officer was performing his duty and the person ought to know that the person is a police officer will be liable to serve imprisonment\n4. Bail must be issued before the offender appears before the court" },
+      { title: "Section 46 – Self-defence against unprovoked assault", text: "1. When a person is unlawfully assaulted and has not provoked the assault, it is lawful for the person to use force reasonably necessary to make the defence against the assault, if the force used is not intended and is not likely to cause death or grievous bodily harm.\n\n2. If the nature of the assault is such to cause death or grievous bodily harm, the person using force by way of defence believes, on reasonable grounds, that the person can not otherwise preserve the person defended from death or grievous bodily harm, it is lawful for the person to use any such force necessary to the assailants as is necessary for defence even though it caused the death of grievous bodily harm. It is upon the defendant to prove that the force is necessary." },
+      { title: "Section 47 – Self-defence against provoked assault", text: "1. When a person has unlawfully assaulted another or has provoked an assault from another as such caused reasonable death or grievous bodily harm, and to induce the person to believe, on reasonable grounds, that it is necessary for the person’s preservation from death or grievous bodily harm to use the force in self-defence, the person is not criminally responsible for using any such force as is reasonably necessary for such preservation although such force may cause death or grievous bodily harm.\n\n2. This protection does not extend to a case in which the person who causes the death or grievous bodily harm first begins the assault with intent to kill or to do grievous bodily harm to another person. The person must decline further conflict or retreat as far as was practicable." },
+      { title: "Section 48 – Aiding in self-defence", text: "1. It is lawful for any person to use force of any degree reasonable for the purpose of defending himself, herself or another person against an assault. It is lawful for any person to act in good faith to aid the person for the purpose of defending the person." },
+      { title: "Section 49 – Accessory to Murder and Attempt to Murder", text: "1. Any person who becomes an accessory to murder or attempted murder is guilty of a crime and is liable for imprisonment\n\nMaximum Penalty - 60 Months Imprisonment" },
+      { title: "Section 50 – Going Armed so as to cause fear", text: "1. Any person who goes armed in public without lawful reason in such a manner as to cause fear to any person is guilty of a misdemeanour and is liable to imprisonment for 15 months.\n\n2. The offender may be, and it is hereby declared that the offender is always liable to be arrested without a warrant.\n\nMaximum Penalty - 15 Months Imprisonment" },
+      { title: "Section 51 – Manslaughter", text: "1. A person who unlawfully kills another under any of the such circumstances as not to constitute murder is guilty of manslaughter\n2. No intention to cause the death of the person\n\nMaximum Penalty - 40 Months Imprisonment" },
+      { title: "Section 52 – Stealing/Possession of Stolen Goods", text: "1. A person is stealing if they fraudulently convert this possession of a person into their own.\n2. Any person who steals or attempts to steal anything and is found with stolen goods on them is guilty of a crime\n\nMaximum Penalty - 10 Months Imprisonment" },
+      { title: "Section 53 – Burglary", text: "1. Any person who enters or is in the premises or dwelling of another with the intention to commit an indictable offence in the premises or dwelling is committing a crime" },
+      { title: "Section 54 – Attempted theft of a motor vehicle", text: "1. A person who attempts to steal a motor vehicle that doesn’t belong to them is guilty of a crime\n\nMaximum Penalty - 10 Months Imprisonment" },
+      { title: "Section 55 – Theft of a Motor Vehicle", text: "1. A person who steals a motor vehicle that does not belong to them is guilty of an offence\n\nMaximum Penalty - 15 Months Imprisonment\n\n2. Any person committing theft of a motor vehicle and then boosting the stolen vehicle is guilty of an offence\n\nMaximum Penalty - 25 Months Imprisonment" },
+      { title: "Section 56 – Arson", text: "1. Any person who wilfully and unlawfully destroys or damages property by fire is guilty of a crime, and is liable to imprisonment\n\nMaximum Penalty - 10 Months Imprisonment" },
+      { title: "Section 57 – Trespassing on Restricted Government Property", text: "1. Any person who unlawfully enters or remains in an area designated for appropriate personnel on government property is guilty of an offence.\n\n2. Subject to subsection (1), a government property refers to the NSW Courts, Police Stations, Government Hospitals and any other Government Owned Buildings, Area designated for appropriate personnel refers to staff-only areas/locked areas etc\n\nMaximum Penalty - 15 Months Imprisonment" },
+      { title: "Section 58 – Going armed to Government Property", text: "1. Any person who without lawful excuse being armed enters or is found in a government property such as NSW Courts, Police Stations, Government Hospitals and any other Government-owned buildings, upon such grounds is guilty of an offence and is guilty of an offence.\n\nMaximum Penalty - 25 Months Imprisonment" },
+      { title: "Section 59 – Armed Robbery", text: "1. Any person who is armed or pretends to be armed with any dangerous or offensive weapon or instrument at the time of the robbery is liable to imprisonment\n\n2. The circumstances of aggravation for an offence against this section is armed robbery of Pacific Standard, the offender is liable to imprisonment\nMaximum Penalty - 40 Months Imprisonment\n\n3. The circumstances of aggravation for an offence against this section is armed robbery of a Bobcat, the offender is liable to imprisonment\nMaximum Penalty - 50 Months Imprisonment\n\n4. The circumstances of aggravation for an offence against this section is armed robbery of a Fleeca Bank (ANZ, NAB, CommBank), the offender is liable to imprisonment\nMaximum Penalty - 25 Months Imprisonment\n\n5. The circumstances of aggravation for an offence against this section is armed robbery of Vangelico Jewellery, the offender is liable to imprisonment\nMaximum Penalty - 20 Months Imprisonment\n\n6. The circumstances of aggravation for an offence against this section is armed robbery of a Bank Truck, the offender is liable to imprisonment\nMaximum Penalty - 20 Months Imprisonment\n\n7. The circumstances of aggravation for an offence against this section is armed robbery of a General Store, the offender is liable to imprisonment\nMaximum Penalty - 15 Months Imprisonment\n\n8. The circumstances of aggravation for an offence against this section is armed robbery of an Automated Teller Machine, the offender is liable to imprisonment\nMaximum Penalty - 15 Months Imprisonment" },
+      { title: "Section 60 – Taking control of aircraft", text: "1. Any person who unlawfully either directly or indirectly takes control of any aircraft that isn't licensed is guilty of a crime\n\nMaximum Penalty - 15 Months Imprisonment" },
+      { title: "Section 61 – Unlawful entry of a vehicle for committing an indictable offence", text: "1. A person who unlawfully enters another person’s vehicle with intent to commit an indictable offence commits a crime\n\n2. If the offender uses or threatens the use of actual violence; or is or pretends to be armed with a dangerous or offensive weapon or instrument; the offender is liable to imprisonment\n\nMaximum Penalty - 5 Months Imprisonment" },
+      { title: "Section 62 – Seizing Vehicles", text: "1. All vehicles have the following opportunity once they have been proven guilty of Sections (14), (15), (16);\n   1. First offence: Warning 3-hour impound\n   2. Second Offence: 6-hour impound\n   3. Three or More Times: 24-hour impound\n\n2. Police may apply for a vehicle seizure order to the courts after the vehicle has been impounded three times under Sections (14), (15), and (16) and must show evidence for each time the vehicle has been impounded.\n\n3. Once the vehicle has been seized by the courts, they may decide whether or not the seized vehicle’s owner will have to pay a fee or it will be auctioned off to the public" },
+      { title: "Section 63 – Escape from Lawful Custody", text: "1. A person who escapes from lawful custody is guilty of a crime\n\nMaximum Penalty - 20 Months Imprisonment" },
+      { title: "Section 64 – Assist the escape from lawful custody", text: "1. Aids a person in lawful custody to escape, or to attempt to escape from lawful custody or frees a person from lawful custody without authority is guilty of a crime.\n\nMaximum Penalty - 10 Months Imprisonment" },
+      { title: "Section 65 – Impersonation", text: "1. A person who wears clothing that is law enforcement and or impersonates an officer is guilty of a crime\n\nMaximum Penalty - 30 Months Imprisonment" },
+      { title: "Section 66 – Unlawful Gambling", text: "Any person who operates a place-\n1. For the purpose of conducting an unlawful game, the person or another person commits a crime\n2. Casino chips are not to be taken or removed from a licensed venue at any time if seen outside the venue, the person is, therefore, liable to a fine or imprisonment\n\nGames- Gambling and Betting included\nIt is unlawful for any person to host any organised gambling or betting events at an unlicensed venue for profit. The only people exempt from this are people who apply to the courts for a gambling license. The casino is the only licensed gambling venue as of 31/10/2023" },
+      { title: "Section 67 – Official Corruption", text: "1. Any person who-\n   1. Being employed in public service, or being a holder of any public office, and being charged with the performance of any duty by virtue of such employment, corruptly asks for, receives or obtains, or agrees or attempts to receive or obtain, any property or benefit of any kind for himself, herself or any other person.\n\nMaximum Penalty - 80 Months Imprisonment" },
+      { title: "Section 68 – Laundering of Cash", text: "1. Any person who takes part in the conversion of marked bills/illegal goods (Marked Money) to regular bills is guilty of an offence\n\n2. Subject to subsection (1), to take part in includes the transport of the tainted bills/illegal goods in order to facilitate physical conversion of the tainted bills and/or anyone who supplies resources to assist in the conversion.\n\nMaximum Penalty - 40 Months Imprisonment" },
+      { title: "Section 69 – Outlaws", text: "1. The NSW Supreme Court may issue an Outlaw Court Order on a person or group of persons after an application made by the New South Wales Police Force has been officially heard.\n\n2. Any individual officially named in an Outlaw Court Order as an “OutLaw” is subject to double maximum penalties stated in current legislation for any offence, including fines.\n\n3. Subject to subsection (2), double penalties do not apply to Section (70) and Section (71)\n\n4. Subject to subsection (1), an outlaw Order’s duration may be extended subject to an application made to the New South Wales Supreme Court by the New South Wales Police Force.\n\n5. Outlaws are subject to searches of their person and property at any time by police.\n\n6. Outlaws are subject to a subsequent Firearm Prohibition Order, valid until the Outlaw expires or is revoked by the New South Wales Supreme Court. Effects seen in Section (29)\n\n7. Individuals not named in an Outlaw Order who make contact and associate with an Outlaw, knowingly or not, are subject to extensive investigation by police and may be charged with offences\n\n8. All clothing, accessories and media that represent an Outlawed person or group are prohibited and are to be seized or destroyed by police.\n\n9. Properties and/or businesses owned or exclusively used by outlaws may be seized by police for the duration of the Outlaw subject to an application made by the New South Wales Police Force.\n\n10. Phones and radios may be frequently reviewed by police to evaluate if criminal consorting has occurred.\n\n11. Subject to subsection (7), individuals may be added to or removed from Outlaw Orders subject to a police application to the New South Wales Supreme Court" },
+      { title: "Section 70 – Participation in Organised Crime", text: "1. A person who-\n   1. Is a participant in an outlawed criminal organisation; or\n   2. Is actively involved in an organised crime with an outlaw/an outlawed criminal organisation; or\n   3. Recruits or attempts to recruit, another person to become, or associate with, a participant in an outlawed criminal organisation;\nCommits a Misdemeanour\n\n2. Any individual who represents, advocates or displays an Outlawed Criminal Organization through the use of clothing, accessories or media, commits an offence\n\nMaximum Penalty - 60 Months Imprisonment" },
+      { title: "Section 71 – Criminal Consorting", text: "1. Any individual named in an Outlaw Court Order, provided by the NSW Supreme Court, that associates, involves or communicates in any way with at least 2 other individuals named in the Outlaw commits an offence.\n\n2. Subject to subsection (1), individuals under an Outlaw are excepted if contact is made without the intention of doing so. Upon which, the individuals must disassociate as soon as reasonably possible or an offence has been committed.\n\n3. Police may search individuals they reasonably suspect have consorted, are consorting or is likely to consort with one or more recognised Outlaws.\n\n4. Individuals who associate, communicate, or interact with an Outlawed person for the purpose of facilitating communication between other Outlawed persons commit an offence\n\nMaximum Penalty - 60 Months Imprisonment" },
+      { title: "Section 72 – Fraud", text: "1. A person who, by any deception, dishonestly–\n   1. Obtains property belonging to another, or\n   2. Obtains any financial advantages or causes any financial disadvantage, is guilty of the offence of fraud\n\nMaximum Penalty - 20 Months Imprisonment" },
+      { title: "Section 73 – Contempt of Court", text: "1. Any person who causes a disturbance in court that affects any court hearing is subject to contempt of court and is guilty of a crime\n\nMaximum Penalty - 20 Months Imprisonment" },
+      { title: "Section 74 – Unpaid Fines", text: "1. This section applies to any person who has received a police fine or a court bill\n\n2. If the person has received a fine but is contrasting the matter, the person is not required to pay the fine pending the outcome of their matter\n\n3. A person may have their assets seized by a court and the assets owned by the debtor will be auctioned off for whatever amount is necessary to recover unpaid fines or bills\n\n4. If a person does not have any assets to seize, police may request for a judicial officer to impose an imprisonment period of 10 months per fine\n\n5. A person has 7 days to pay a fine upon a fine being issued. If the person fails to pay a fine in the allotted time their assets may be seized by the police subject to an application made to the courts\n\n6. If the offender has committed further offences during the 1 week, and the person has unpaid fines on them, judicial officers may impose an imprisonment period of 1 month per $1000 unpaid, there is no maximum amount of time\n\n7. If a person has trouble paying off their unpaid fines, place contact the courts within 24 hours after receiving the fine so they courts can assist you." },
+      { title: "Section 75 – Extortion", text: "1. Any person who, without reasonable cause, makes a demand with the intention to gain a benefit for any person; or causes a detriment to any person other than the person who is the demander; commits a crime.\n\nMaximum Penalty - 20 Months.\nIf carrying out threats causes, or would be likely to cause, serious personal injury to another person - 30 Months Imprisonment" },
+      { title: "Section 76 – Breach of Bail", text: "1. If a person breaches any of their bail conditions they may be given a warning or be charged with breach of bail. It is up to the discretion of the officers dealing with the incident and the seriousness of the breach.\n\n2. The person shall be charged with breach of bail and fined double the amount of the charge being laid on them\n\n3. A defendant must not breach any conditions may include:\n   1. Appears in accordance with the person’s bail and surrenders into custody; or\n   2. While released on bail does not-\n      * Commit an offence; or\n      * Endanger the safety or welfare of members of the public; or\n      * Interfere with the witnesses or otherwise obstruct the course of the justice whether in relation to the person for another person; or\n      * Any other special conditions which could include bail with surety which must be complied with;\nSubject to the provisions above, the Court or police officers shall impose such conditions as the court or police officer thinks fit for any or all such purposes" },
+      { title: "Section 77 – Illegal Goods in Custody", text: "1. A person who has anything in their custody which may reasonably be suspected of being stolen or otherwise unlawfully obtained, commits a crime\n\n   1. If the goods were obtained by the way of an act constituting a crime - 10 months imprisonment; or\n   2. If the goods are a firearm or ammunition - 10 months imprisonment; or\n   3. If the offender obtains or received the goods under a license - 10 months imprisonment\n   4. If the goods were illicitly obtained cash (“Marked Money”) up to\n      $100 - $30,000 - 10 Months Imprisonment\n      $30,000 - $100,000 - 15 Months Imprisonment\n      $100,000 - $500,000 - 25 Months Imprisonment\n      $500,000 - $1,000,000 - 40 Months Imprisonment" },
+      { title: "Section 78 – The arrest of Wrong Person", text: "1. A person who, being duly authorised to execute a warrant to arrest a person, believing in good faith and reasonable ground that the person arrested is the person named in the warrant, is not criminally responsible for doing so to any greater extent than if the person arrested has been the person named in the warrant\n\n2. Any person who lawfully assists in making an arrest, believing that the person arrest is the person named in the warrant, or who, being required by the warrant to receive and detain the person named in it, receives and detains the person so arrested, is not criminally responsible.\n\n3. If a public officer unduly arrests or detains an individual without offering reasons, in good faith or holds reasonable belief on reasonable grounds. Arresting another without lawful justification is deemed to have made an unlawful arrest. The person in detainment must file a complaint to the Police Cabinet, Australian Federal Police and the courts in order for any proceedings to occur. The public officer may be liable to imprisonment for up to 20 months." },
+      { title: "Section 79 – Duty of Persons Arresting", text: "1. It is the duty of a person executing any process or warrant to have it with him or her, if reasonably practised, and to produce it if required.\n\n2. It is the duty of a person arresting another, with or without a warrant to give notice, if practicable, of the process or warrant under which the person is acting or of the cause of the arrest\n\n3. A failure is acting either of the aforesaid duties does not of itself make the execution of the process or warrant of the arrest unlawful" },
+      { title: "Section 80 – Force Used in Executing Process or in Arrest", text: "1. It is lawful for a person who is engaged in the lawful execution of any sentence, process or warrant, or in making any arrest, and for any person lawfully assisting the person, to use such force as may be reasonably necessary to overcome any force used in resisting such execution or arrest" },
+      { title: "Section 81 – Police Powers to Enter Dwelling/Premises", text: "1. A police officer may enter a dwelling/premises to arrest or detain a person only if the police officer believes on reasonable grounds that the person to be arrested or detained is in the dwelling/premises.\n\n2. Police may only search the dwelling/premises for the person/s who may be hiding within the dwelling premises.\n\n3. If police find any illegal item within the dwelling/premises. Police must apply for a warrant to continue to search throughout the dwelling/premises." },
+      { title: "Section 82 – Defective Vehicle", text: "1. A vehicle is defective if-\n   1. A part of the vehicle-\n      i) Does not comply with vehicle standards set by the police; or\n      ii) Does not perform its intended function; or\n      iii) Has deteriorated to an extend that is can not be reasonably relied on to perform it intended function\n\n   2. Equipment fitted by the vehicle standards does not comply with the requirements specified in the vehicle standards and does not perform its intended function; or\n   3. Optional equipment fitted by the vehicle standards does not comply with the requirement specified in the vehicle standards and does not perform its intended function; or\n   4. The vehicle is unsafe" },
+      { title: "Section 83 – Defect Notices", text: "1. A vehicle that is defective may be issued a defect notice by an authorised officer if they reasonably believe;\n   1) That the vehicle is defective; or\n   2) That a vehicle is not defective, but that driving or parking it on a road would seem to be defective\n\n2. The defective notice may be given to the vehicle’s owner or the person who is driving the vehicle when the defective notice was issued, whether or not if the driver is the owner.\n\n3. The defect notice may require the owner or driver of the vehicle to remove or repair the defective items within a specified time frame. Failure to comply with the notice may result in further penalties, including fines or impounding of the vehicle up to 72 hours\n\n4. The decision to impound a vehicle is at the discretion of the police officer based on the severity of the defect or modification and the risk it poses to the safety of the driver and other road users. It is always advisable to comply with the defect notice and make the necessary repairs or modifications to ensure the safety of the vehicle and its occupants" },
+      { title: "Section 84 – Identification and Modification Plates", text: "1. A person must not, without the court’s approval\n   1) Alter or deface an identification plate from a vehicle; or\n   2) Remove an identification plate from a vehicle" },
+      { title: "Section 85 – Modifying Vehicle", text: "1. A person must not-\n   1. Modify a vehicle, its parts or equipment in a way that may adversely affect the safety of a vehicle\n   2. Fit a light or reflector to a vehicle unless the light or reflector is required to be fitted.\n\nSome of the examples include:\n   i) Removing the bonnet/hood of the vehicle\n   ii) Removing a bumper\n   iii) Neon Underglows\n   iv) Removing headlights/parking lights/tail lights\n   v) Lowrider hydraulics\n\n2. A person does not contravene this section if-\n   1) The modification complies with the approval of the courts, or\n   2) The vehicle is not to be used on the road" },
+      { title: "Section 86 – Vehicle Turning Ability", text: "1. A motor vehicle must not be able to turn in a circle and the wheels must clearly not scrape the bumper/fender when turning the wheels left or right" },
+      { title: "Section 87 – Protrusions", text: "1. A thing fitted to a vehicle must be designed and built to fit the vehicle and will minimise any safety hazards." },
+      { title: "Section 88 – Driver’s View and Vehicle Control", text: "1. A motor vehicle must be built to allow the driver a view of the road on the front and sides of the vehicle so that the driver can drive the vehicle safely." },
+      { title: "Section 89 – Seating", text: "1. A seat for a driver or a passenger in a vehicle must be attached to the vehicle." },
+      { title: "Section 90 – Windscreen and Window Tints", text: "1. Glazing used in a windscreen or windows of a motor vehicle must have visibility of at least 50% where an officer can see through the windows and make known the drivers and passengers of a vehicle without disruption. (Anything below Light Smoke is usually fine, exceptional for some vehicles- anything with a clear front windscreen and side full black windows are illegal)\n\n2. There are exemptions to this where the court has given authorisation for an applicant to tint their vehicle for personal reasons under this act." },
+      { title: "Section 91 – Tyres", text: "1. If a tyre is deemed to have deflated or if a vehicle is running on its rims, the vehicle is deemed to be defective." },
+      { title: "Section 92 – Headlights", text: "1. A motor vehicle must be fitted with a pair of functioning headlights. If there is only one functional headlight, the vehicle is deemed defective" },
+      { title: "Section 93 – How Persons Must Travel in a Motor Vehicle", text: "1. A person must not travel in or part of a motor vehicle that is not designed primarily for the carriage of passengers\n\n2. A person must not drive with a passenger on them and must not drive with a passenger if any part of the passenger’s body is outside a window or door of the vehicle." },
+      { title: "Section 94 – Parking/Tail Lights", text: "1. A motor vehicle must be fitted with a pair of functioning parking lights or tail lights, if there is only one functioning parking/tail light, the vehicle is defective." },
+      { title: "Section 95 – Robbery", text: "1. Any person who steals anything, at or immediately before or immediately after the time of stealing, uses or threatens the use of actual violence to any person or property to obtain the thing stolen or prevent resistance to the item or something being stolen is guilty of robbery.\n\nMaximum Penalty - 10 Months Imprisonment" },
+      { title: "Section 96 – Vandalism", text: "1. Any person/s who intentionally or recklessly destroys or damages property belonging to another." },
+      { title: "Section 97 – Attempted Robbery", text: "1. Any person who assaults any person with the intent to steal anything, and, at or immediately before or immediately after the assault, uses or threatens to use actual violence to any person or property to obtain the thing intended to be stolen or prevented resistance to the item capable of being stolen is guilty of a crime.\n\nMaximum Penalty - 10 Months Imprisonment" },
+      { title: "Section 98 – Cruelty to Law Enforcement Animal", text: "1. Any person/s who intentionally kills or injuries an animal used for law enforcement is guilty of an offence\n   1. If any person/s injuries that animal (animal means a dog) and it is being used by a government employee in their duties is guilty of an offence.\nMaximum Penalty - 10 Months Imprisonment\n\n   2. If any person/s kills that animal (animal means a dog) and it is being used by a government employee in their duties is guilty of an offence.\nMaximum Penalty - 20 Months Imprisonment" },
+      { title: "Section 99 – Damage to Government Property", text: "1. Any person/s who intentionally or recklessly destroys or damages government property is guilty of an offence\n\nMaximum Penalty - 5 Months Imprisonment" },
+      { title: "Section 100 – Aiding to Abetting", text: "1. A person who aids, abets, counsels or procures the commission of an offence by another person is taken to have committed that offence and is punishable accordingly\n   1. The person’s conduct must have in fact aided, abetted, counselled or procured the commission of the offence by the other person; and\n   2. The offence must have been committed by the other person\n\nMaximum Penalty - 15 Months Imprisonment" },
+      { title: "Section 101 – Unlawful Custody of a Person by Officers/Persons", text: "1. Any person who detains or assumes the custody of another without proper certification or material, particularly without justification or reason is guilty of a misdemeanour and is liable to imprisonment for 10 months." },
+      { title: "Section 102 – Terrorist Acts - May Carry Mandatory Imprisonment", text: "1. A person commits an offence if the person engages in terrorist acts.\n\n2. Mandatory penalty - 4 days + judicial discretion to go higher, a person charged with terrorism must be seen before the court before sentencing and must be remanded in custody till a hearing\n\n3. Once a person has been convicted of terrorism, they will receive a stop and search order, for 1 month, and will be required to wear an anklet for 1 month\n   1. Stop and Search order, consists of officers being able to stop and search the convicted terrorist and if in a vehicle, search the vehicle and all occupants.\n\n4. The action is done or the threat is made with the intention of advancing a political, religious or ideological cause; and\n   1. The action is done or the threat is made with the intention of:\n      i) Coercing, or influencing by intimidation, the government of the state; and intimidating the public or a section of the public\nOR\n   a) The action falls under this section if it:\n      i) Causes serious harm that is physical harm to a person, or\n      ii) Causes serious damage to property, or\n      iii) Causes a person’s death, or\n      iv) Endangers a person’s life, other than the life of the person taking the action; or\n      v) Creates a serious risk to the health and safety of the public" },
+      { title: "Section 103 – Riot", text: "1. If-\n   1. 10 or more people who are present together use or threaten to use unlawful violence to a person or property for a common purpose, and\n   The conduct taken together would cause a person in the vicinity to reasonably fear for their personal safety; Each of the assembled persons commits the crime of taking part in a riot.\n\nMaximum Penalty - 15 Months Imprisonment" },
+      { title: "Section 104 – Attempting to Destroy Property and or Injure by Explosive or Noxious Substances", text: "1. Any person who unlawfully, with intent to do any bodily harm or injure another by putting explosives or noxious substances in any place whatsoever, is guilty of a crime.\n\n2. Any person who unlawfully, with the intention to destroy or to damage any property, puts an explosive substance, device or instrument in any place is guilty of a crime\n\nMaximum Penalty - 60 Months Imprisonment" },
+      { title: "Section 105 – Bomb Hoaxes", text: "1. Any person who places or sends an article or substance in any place or any way, with the intention to induce the person to believe that the article or substance is likely to explode, ignite or discharge a dangerous or noxious substance, commits a crime.\n\nMaximum Penalty - 40 Months Imprisonment\n\n2. Any person, who conveys information that he or she knows is false with the intention of inducing a person to believe that there is an explosive or noxious substance at any place where or whatever, commits a crime.\n\nMaximum Penalty - 40 Months Imprisonment" },
+      { title: "Section 106 – Destroy or Damage Property With Explosives", text: "1. Any person who unlawfully, destroys or damages any property, or puts an explosive substance, device or instrument in any place is guilty of a crime.\n\nMaximum Penalty - 70 Months Imprisonment" },
+      { title: "Section 107 – Computer Hacking and Misuse", text: "1. If a person intends to cause detriment or damage or to gain a benefit from hacking a software device or any type of electronic device commits a crime and is liable to imprisonment\n\nMaximum Penalty - 10 months Imprisonment" },
+      { title: "Section 108 – Bribery of a Public Officer", text: "1. Any person who-\n   1. Attempts to influence an employee of the NSW Government in the person’s vote, opinion, judgement or action within the NSW Government to obtain further benefits from himself, herself or to any others is guilty of a crime and is liable to imprisonment\n\nMaximum Penalty - 5 Months Imprisonment" },
+      { title: "Section 109 – Discharging Firearm in a Public Area", text: "1. A person who discharges a firearm in public without reasonable excuse is guilty of a crime and is liable to imprisonment.\n\nMaximum Penalty - 10 Months Imprisonment" },
+      { title: "Section 110 – Illegal Fishing", text: "1. A person who is found fishing at a non-elected regulated fishing zone is guilty of a crime and punishable with a fine.\n\n2. A person who is found fishing in a non-regulated fishing zone will have all fish confiscated on their person.\n\n3. Elected regulated fishing zones;\n   1. Oceans\n   2. Lakes\n   3. Rivers\n   4. Dams" },
+      { title: "Section 111 – No Fly Zones", text: "1. Anyone in an air vehicle within a “No Fly Zone” can and will be met with the necessary force to disable the aircraft by authorities\n\n2. Current No Fly Zones consist of any government facility without authorisation from a ranking member within the facility\n\nMaximum Penalty - 30 Months Imprisonment" },
+      { title: "Section 112 – Possession of Government Equipment", text: "1. Government equipment refers to any item, device, or instrument designed, intended, or commonly used by government employees in the performance of their official duties\n\n2. Government employee refers to an individual duly employed by a recognised governing body and authorised to carry and use government equipment in the course of their duties\n\nMaximum Penalty - 90 Months Imprisonment" }
     ];
 
-    const TARGET_SECTIONS = 112;
-    if (legislationSections.length < TARGET_SECTIONS) {
-      for (let i = legislationSections.length + 1; i <= TARGET_SECTIONS; i++) {
-        legislationSections.push({
-          title: `Section ${i}`,
-          text: "Text to be prescribed."
-        });
-      }
-    }
-
     const sidebar = document.getElementById("sidebar");
+    const tocLinks = document.getElementById("toc-links");
+    const searchInput = document.getElementById("search-input");
     const content = document.getElementById("content");
 
+    // Build TOC
     legislationSections.forEach((section, index) => {
-      const sectionNumber = index + 1;
-      const id = `section-${sectionNumber}`;
-
+      const num = index + 1;
+      const id = `section-${num}`;
       const link = document.createElement("a");
       link.href = `#${id}`;
       link.textContent = section.title;
-      sidebar.appendChild(link);
+      tocLinks.appendChild(link);
 
       const article = document.createElement("section");
       article.id = id;
-
-      const h3 = document.createElement("h3");
-      h3.textContent = section.title;
-
-      const pre = document.createElement("pre");
-      pre.textContent = section.text;
-
-      article.appendChild(h3);
-      article.appendChild(pre);
+      article.innerHTML = `<h3>${section.title}</h3><pre>${section.text}</pre>`;
       content.appendChild(article);
     });
-  </script>
 
+    // Search functionality
+    searchInput.addEventListener("input", function () {
+      const term = this.value.toLowerCase();
+      document.querySelectorAll(".section").forEach(sec => {
+        const text = sec.textContent.toLowerCase();
+        sec.style.display = term === "" || text.includes(term) ? "block" : "none";
+      });
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute("href"));
+        target.scrollIntoView({ behavior: "smooth" });
+      });
+    });
+  </script>
 </body>
 </html>
